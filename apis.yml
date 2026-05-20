@@ -26,6 +26,8 @@ apis:
     description: >-
       The Western Alliance Bancorporation API provides access to platform services and data for enterprise integration and automation.
 common:
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/western-alliance-bank
   - type: Website
     url: https://www.westernalliancebancorp.com
 maintainers:
