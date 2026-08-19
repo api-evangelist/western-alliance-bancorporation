@@ -22,7 +22,7 @@ description: >-
   Western Alliance Bancorporation is a major US corporation and Fortune 1000 company. The Western Alliance Bancorporation API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
 created: '2026-04-19'
 modified: '2026-04-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
   - aid: western-alliance-bancorporation:western-alliance-bancorporation-api
     name: Western Alliance Bancorporation API
