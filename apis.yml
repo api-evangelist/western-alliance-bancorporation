@@ -17,6 +17,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
 tags:
   - Banking
+  - Financial-Services
+tags_raw:
+  - Banking
   - Financial Services
 description: >-
   Western Alliance Bancorporation is a major US corporation and Fortune 1000 company. The Western Alliance Bancorporation API provides programmatic access to its platform services, data, and integrations for enterprise customers and partners.
@@ -27,6 +30,9 @@ apis:
   - aid: western-alliance-bancorporation:western-alliance-bancorporation-api
     name: Western Alliance Bancorporation API
     tags:
+      - Banking
+      - Financial-Services
+    tags_raw:
       - Banking
       - Financial Services
     image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
