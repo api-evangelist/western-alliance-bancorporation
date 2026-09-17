@@ -1,0 +1,118 @@
+generated: '2026-09-17'
+method: searched
+source: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml, openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml,
+  openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml, openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml,
+  openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml, openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml,
+  openapi/western-alliance-bancorporation-check-image-api-openapi.yml, openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml,
+  openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml, openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml,
+  openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml, openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  ...
+summary:
+  types:
+  - apiKey
+  - http
+  - mutualTLS
+  api_key_in:
+  - header
+schemes:
+- name: bearerToken
+  type: http
+  scheme: bearer
+  description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for
+    the appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+  sources:
+  - openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  - openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
+  - openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  - openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  - openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  - openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  - openapi/western-alliance-bancorporation-token-api-openapi.yml
+  - openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+- name: appClientId
+  type: apiKey
+  in: header
+  parameter: appClientId
+  description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+  sources:
+  - openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  - openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
+  - openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  - openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  - openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  - openapi/western-alliance-bancorporation-token-api-openapi.yml
+  - openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+- name: appClientSecret
+  type: apiKey
+  in: header
+  parameter: appClientSecret
+  description: Client Secret known only to the client and the WAB API gateway.
+  sources:
+  - openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  - openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
+  - openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  - openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  - openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  - openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  - openapi/western-alliance-bancorporation-token-api-openapi.yml
+  - openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+- name: clientCertificate
+  type: mutualTLS
+  description: WAB-issued Client Certificate installed on approved company servers "capable of and/or allowed to
+    initiate a funds transfer" (API Services Terms 1(i), 6(c)(ii)). Documented in the Terms, not in any published
+    collection.
+  sources:
+  - https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+docs:
+- https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+- https://developer.westernalliancebank.com/s/get-token-tutorial
+- https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+note: Upgraded from the API Services Terms & Conditions (v6, May 14 2025) and the provider Token API Postman collection.
+  Enrollment through Treasury Management issues a Client ID and Client Secret (Terms 1(j)/(k), 6(c)(i)); the client
+  sends them as the appClientId / appClientSecret headers to GET /entitlements-get-token-eapi/api/v1/token?Scope=<Informational|...>
+  and receives a bearer token "valid for a limited period of time" (Terms 6(c)(iii)); every API call must be signed
+  with that token. Funds-transfer clients also install a WAB-issued Client Certificate on approved servers (Terms
+  1(i), 6(c)(ii)) - a mutual-TLS control the Postman collections cannot show. The TassatPay beta adds a second credential
+  layer (Tassat client_id/client_secret -> access_token, then a user_token per wallet user). Multi-factor procedures
+  may be required (Terms 7). The developer.westernalliancebank.com openid-configuration is the Salesforce portal
+  login IdP, not the API auth server.
+flow:
+- step: 1
+  action: Enroll in Treasury Management API services; WAB issues Client ID + Client Secret (and a Client Certificate
+    for funds-transfer products).
+- step: 2
+  action: GET https://api-connect.westernalliancebank.com/entitlements-get-token-eapi/api/v1/token?Scope=Informational
+    with headers appClientId, appClientSecret, X-Correlation-ID (GUID).
+  operationId: getToken
+- step: 3
+  action: 'Send Authorization: Bearer <token> plus X-Correlation-ID on every product API call; refresh the token
+    when it expires (lifetime not published).'
+scopes:
+  style: query parameter Scope on the token endpoint
+  documented_values:
+  - Informational
+  note: Only "Informational" appears in the published collections; the Transactional and Digital Assets collections
+    request the same scope value. No scope reference page is published anonymously.

@@ -1,0 +1,20 @@
+generated: '2026-09-17'
+method: generated
+source: >-
+  Packaged Agent Skills generated from the OpenAPI documents derived from Western Alliance Bank's published Postman
+  collections and Intrabank Transfer user guide. Every step is grounded in an operationId verified verbatim in
+  ../openapi/*.yml; cross-cutting rules cite ../conventions/, ../errors/, ../authentication/, ../asyncapi/ and
+  ../sandbox/. No provider-published skills or AGENTS.md were found (searched the portal sitemap and GitHub).
+skills:
+  - file: western-alliance-bancorporation-initiate-and-reconcile-intrabank-transfer.md
+    name: Initiate and reconcile an intrabank transfer
+    api: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
+    operations: [getToken, initiateIntraBankTransfer, searchIntraBankTransfers, getIntradayTransactions, getPriordayTransactions]
+  - file: western-alliance-bancorporation-check-balances-and-transactions.md
+    name: Check balances and pull transaction history
+    api: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+    operations: [getToken, getBalance, getIntradayTransactions, getPriordayTransactions, getDateRangeTransactions]
+  - file: western-alliance-bancorporation-submit-wire-request.md
+    name: Submit a wire transfer request
+    api: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+    operations: [getToken, healthcheck, wiresRequestAPI, getPriordayTransactions]

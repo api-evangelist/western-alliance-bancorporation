@@ -1,0 +1,23 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist overlay for Western Alliance Bank Token API
+  version: 1.0.0
+  x-generated: '2026-09-17'
+  x-method: generated
+extends: ../openapi/western-alliance-bancorporation-token-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apis-io:
+      provider: western-alliance-bancorporation
+      family: Utility
+      portal: https://developer.westernalliancebank.com/s/
+      conventions: conventions/western-alliance-bancorporation-conventions.yml
+      errors: errors/western-alliance-bancorporation-problem-types.yml
+      authentication: authentication/western-alliance-bancorporation-authentication.yml
+- target: $.paths.*[?(@.security && @.security.length > 0)]
+  update:
+    x-auth-flow: 'getToken (appClientId + appClientSecret) -> Authorization: Bearer; tokens are time-limited'
+- target: $.paths.*.*.parameters[?(@.name =~ /x-correlation-id/i)]
+  update:
+    x-tracing: client-generated GUID; echo it in support requests

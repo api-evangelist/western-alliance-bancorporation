@@ -1,0 +1,356 @@
+generated: '2026-09-17'
+method: derived
+source: mcp/western-alliance-bancorporation-mcp.yml (candidate tools) bound to openapi/*.yml operationIds
+purpose: 'Bind each candidate MCP tool to the REST operation whose parameters + requestBody are its real inputSchema.
+  Because the MCP surface is a derived candidate (mode: none), every binding is 1:1 and high-confidence by construction;
+  the value of the file is the rest_only list and the gating note.'
+surfaces:
+  rest_openapi: openapi/ (16 files, 59 operations, derived from provider Postman collections + PDF guide)
+  graphql: null
+  mcp: null
+  gating: 'REST: api-connect.westernalliancebank.com answers 403 anonymously; credentials only via Treasury Management
+    enrollment. MCP: does not exist.'
+crosswalk:
+- tool: ach_request_uat
+  category: transactional
+  rest:
+  - achRequestUAT
+  spec: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_balance
+  category: informational
+  rest:
+  - getBalance
+  spec: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_intraday_transactions
+  category: informational
+  rest:
+  - getIntradayTransactions
+  spec: openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_priorday_transactions
+  category: informational
+  rest:
+  - getPriordayTransactions
+  spec: openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: bank_statements_api
+  category: informational
+  rest:
+  - bankStatementsAPI
+  spec: openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: book_transfer
+  category: transactional
+  rest:
+  - bookTransfer
+  spec: openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_check_image
+  category: informational
+  rest:
+  - getCheckImage
+  spec: openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_date_range_transactions
+  category: informational
+  rest:
+  - getDateRangeTransactions
+  spec: openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: initiate_intra_bank_transfer
+  category: transactional
+  rest:
+  - initiateIntraBankTransfer
+  spec: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: search_intra_bank_transfers
+  category: transactional
+  rest:
+  - searchIntraBankTransfers
+  spec: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: single_account_balance_api_get_balance
+  category: informational
+  rest:
+  - getBalance
+  spec: openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: single_account_intraday_api_get_intraday_transactions
+  category: informational
+  rest:
+  - getIntradayTransactions
+  spec: openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: single_account_priorday_api_get_priorday_transactions
+  category: informational
+  rest:
+  - getPriordayTransactions
+  spec: openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: create_stop_payment_order
+  category: informational
+  rest:
+  - createStopPaymentOrder
+  spec: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: lookup_stop_payments_made_on_an_account
+  category: informational
+  rest:
+  - lookupStopPaymentsMadeOnAnAccount
+  spec: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: entitltments_get_token
+  category: digital assets
+  rest:
+  - entitltmentsGetToken
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: login_request
+  category: digital assets
+  rest:
+  - loginRequest
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: login_status
+  category: digital assets
+  rest:
+  - loginStatus
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: user_token_wallets
+  category: digital assets
+  rest:
+  - userTokenWallets
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: balance_request
+  category: digital assets
+  rest:
+  - balanceRequest
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: balance_balance_request
+  category: digital assets
+  rest:
+  - balanceBalanceRequest
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: deposite_request
+  category: digital assets
+  rest:
+  - depositeRequest
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: deposite_status
+  category: digital assets
+  rest:
+  - depositeStatus
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: redeem_request
+  category: digital assets
+  rest:
+  - redeemRequest
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: redeem_status
+  category: digital assets
+  rest:
+  - redeemStatus
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: send_request
+  category: digital assets
+  rest:
+  - sendRequest
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: send_redeem_status
+  category: digital assets
+  rest:
+  - sendRedeemStatus
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: wallet_balance
+  category: digital assets
+  rest:
+  - walletBalance
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: transactions
+  category: digital assets
+  rest:
+  - transactions
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: client_data
+  category: digital assets
+  rest:
+  - clientData
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: wallet_names
+  category: digital assets
+  rest:
+  - walletNames
+  spec: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  binding: rest
+  confidence: high
+- tool: get_token
+  category: utility
+  rest:
+  - getToken
+  spec: openapi/western-alliance-bancorporation-token-api-openapi.yml
+  binding: rest
+  confidence: high
+- tool: wires_request_api
+  category: transactional
+  rest:
+  - wiresRequestAPI
+  spec: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+  binding: rest
+  confidence: high
+mcp_only: []
+rest_only:
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  path: GET /trnsct-ach-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  path: GET /info-multi-acc-balance-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  path: GET /info-multi-acc-intraday-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  path: GET /info-multi-acc-priorday-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  path: GET /info-bank-statements-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  path: GET /info-check-image-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  path: GET /info-dt-rng-trns-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  path: GET /info-single-acc-balance-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  path: GET /info-single-acc-intraday-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  path: GET /info-single-acc-priorday-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  path: GET /info-stop-payments-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-token-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+- operationId: getToken
+  spec: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+  path: GET /entitlements-get-token-eapi/api/v1/token
+  reason: duplicate of the Token API operation carried in every collection; bound once via get_token
+- operationId: healthcheck
+  spec: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+  path: GET /trnsct-wires-rqst-eapi/api/v1/healthcheck
+  reason: liveness probe; not useful as an agent tool
+coverage:
+  tools: 33
+  bound: 33
+  mcp_only: 0
+  rest_only: 26
+  rest_operations_total: 59

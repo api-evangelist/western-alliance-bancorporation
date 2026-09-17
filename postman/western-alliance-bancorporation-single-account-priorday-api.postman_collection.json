@@ -1,0 +1,285 @@
+{
+	"info": {
+		"_postman_id": "f52dddbe-76d9-40ad-abc7-7621aacff2c1",
+		"name": "Single Account Priorday API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"item": [
+				{
+					"name": "Get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"BearerToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "appClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "appClientSecret",
+								"value": "{{ClientSecret}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_TOKEN_SERVICE}}/token?Scope=Informational",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_TOKEN_SERVICE}}"
+							],
+							"path": [
+								"token"
+							],
+							"query": [
+								{
+									"key": "Scope",
+									"value": "Informational"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Healthcheck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-Dependent-Ping",
+								"value": "false",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_PRIORDAY_SERVICE}}/healthcheck",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_PRIORDAY_SERVICE}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transaction History Priorday",
+			"item": [
+				{
+					"name": "Get Priorday transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-Next-Page-Key",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_PRIORDAY_SERVICE}}/dp/accounts/{{AccountNumber}}/transactions/priorDay",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_PRIORDAY_SERVICE}}"
+							],
+							"path": [
+								"dp",
+								"accounts",
+								"{{AccountNumber}}",
+								"transactions",
+								"priorDay"
+							],
+							"query": [
+								{
+									"key": "TransactionDate\n",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "CheckOrSerialNumber",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "TransactionCode",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "TransactionFilterType\n",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "TransactionAmount",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "ResponseType",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "TransactionCodeList",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "PUBLIC_HOST",
+			"value": "api-connect.westernalliancebank.com",
+			"type": "default"
+		},
+		{
+			"key": "BearerToken",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "AccountNumber",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "ClientId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "ClientSecret",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "BASE_PATH_PRIORDAY_SERVICE",
+			"value": "/info-single-acc-priorday-eapi/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "BASE_PATH_TOKEN_SERVICE",
+			"value": "/entitlements-get-token-eapi/api/v1",
+			"type": "default"
+		}
+	]
+}

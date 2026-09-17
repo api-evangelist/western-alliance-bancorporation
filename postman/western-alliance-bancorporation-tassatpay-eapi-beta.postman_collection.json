@@ -1,0 +1,1777 @@
+{
+	"info": {
+		"_postman_id": "2edd25aa-711d-4f4c-aa11-408a19460674",
+		"name": "TassatPay EAPI | Beta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28579442"
+	},
+	"item": [
+		{
+			"name": "1. Get WAB Token",
+			"item": [
+				{
+					"name": "Entitltments Get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"entToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "AppClientId",
+								"value": "{{entClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "AppClientSecret",
+								"value": "{{entClientSecret}}",
+								"type": "text"
+							},
+							{
+								"key": "x-correlation-id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/entitlements-get-token-eapi/api/v1/token?Scope=Informational",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"entitlements-get-token-eapi",
+								"api",
+								"v1",
+								"token"
+							],
+							"query": [
+								{
+									"key": "Scope",
+									"value": "Informational"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2. Get Tassat Login Token",
+			"item": [
+				{
+					"name": "Login Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"access_token\", jsonData.AccessToken);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "{{tassat_client_id}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{tassat_client_secret}}",
+									"type": "text"
+								},
+								{
+									"key": "audience",
+									"value": "{{audience}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "Time",
+									"value": "{{timestamp}}",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"access_token\", jsonData.AccessToken);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var time = setTimeout(function(){}, [5000]);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{tassat_client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "client_secret",
+								"value": "{{tassat_client_secret}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/login?audience={{audience}}&Time={{timestamp}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"login"
+							],
+							"query": [
+								{
+									"key": "audience",
+									"value": "{{audience}}"
+								},
+								{
+									"key": "Time",
+									"value": "{{timestamp}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3. Get User Token",
+			"item": [
+				{
+					"name": "User Token/Wallets",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"const cdSchema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"Msg\": { \"type\": \"string\" },\r",
+									"        \"UserTokens\": {\r",
+									"            \"properties\": {\r",
+									"                \"ApiConfirmCode\": { \"type\": \"string\" },\r",
+									"                \"user_token\": { \"type\": \"string\" },\r",
+									"                \"Wallet\": { \"type\": \"string\" }\r",
+									"            },\r",
+									"            \"required\": [\"ApiConfirmCode\", \"user_token\", \"Wallet\"]\r",
+									"        },\r",
+									"        \"RequestStatus\": { \"type\": \"string\" },\r",
+									"        \"PageNo\": { \"type\": \"integer\", \"minimum\": 1, \"maximum\": 1 },\r",
+									"        \"PageCount\": { \"type\": \"integer\", \"minimum\": 1, \"maximum\": 1 },\r",
+									"        \"Status\": { \"type\": \"string\" },\r",
+									"        \"Time\": { \"type\": \"string\" }\r",
+									"    },\r",
+									"    \"required\": [\"Msg\", \"UserTokens\", \"RequestStatus\", \"PageNo\", \"PageCount\", \"Status\", \"Time\"],\r",
+									"    \"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\", function () {\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Msg\", function () {\r",
+									"    pm.expect(jsonData.Msg).is.to.equal(\"APIClientUserTokenStatus\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Status is 0\", function () {\r",
+									"    pm.expect(jsonData.Status).is.to.equal(\"0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify Request Status is DONE\", function () {\r",
+									"    pm.expect(jsonData.RequestStatus).is.to.equal(\"Done\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify PageNo is 1\", function () {\r",
+									"    pm.expect(jsonData.Status).is.to.equal(\"0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify PageCount is 1\", function () {\r",
+									"    pm.expect(jsonData.RequestStatus).is.to.equal(\"Done\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Verify ApiConfirmCode\", function () {\r",
+									"\r",
+									"    //pm.expect(jsonData.UserTokens[i]).to.include('confirm_code');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify pageNo\", () => {\r",
+									"\r",
+									"    let counter = 0;\r",
+									"    for (const obj of jsonData.UserTokens) {\r",
+									"        if (obj.ApiConfirmCode === pm.environment.get(\"confirm_code\")) counter++;\r",
+									"    }\r",
+									"    if (counter < 10) {\r",
+									"        pm.expect(jsonData.PageNo).is.to.equal(1);\r",
+									"    }\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify wallet names\", function () {\r",
+									"\r",
+									"    pm.expect(jsonData.UserTokens[0].WalletName1).is.to.equal(pm.environment.get(\"WalletName1\"));\r",
+									"    pm.expect(jsonData.UserTokens[0].WalletName2).is.to.equal(pm.environment.get(\"WalletName2\"));\r",
+									"});\r",
+									"\r",
+									"//TODO Verify wallet names TSSD-4152 TSSD-4149\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "ApiConfirmCode",
+								"value": "dqT_9Q",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "2807144bb9c449c18a9b8ae676bf8853",
+								"type": "text"
+							},
+							{
+								"key": "client_secret",
+								"value": "6Af14b1801c64e85bf78de9AAD0B2519",
+								"type": "text"
+							},
+							{
+								"key": "X-Correlation-Id",
+								"value": "{{$guid}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi{{envKey}}/api/v1/usertoken?Time={{timestamp}}&pageNo=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi{{envKey}}",
+								"api",
+								"v1",
+								"usertoken"
+							],
+							"query": [
+								{
+									"key": "Time",
+									"value": "{{timestamp}}"
+								},
+								{
+									"key": "pageNo",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4. Balance",
+			"item": [
+				{
+					"name": "Balance Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Wallet\": \"0x48652dee06eb85b9ac8f6227f70377d9d1343267\",\r\n  \"Time\": \"2019/07/31 10:05:03 UTC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/balance",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Balance Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/balance?Wallet=0x48652dee06eb85b9ac8f6227f70377d9d1343267&Time={{timestamp}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "Wallet",
+									"value": "0x48652dee06eb85b9ac8f6227f70377d9d1343267"
+								},
+								{
+									"key": "Time",
+									"value": "{{timestamp}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5. Deposite",
+			"item": [
+				{
+					"name": "Deposite Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Wallet\": \"0x48652dee06eb85b9ac8f6227f70377d9d1343267\",\r\n  \"Amount\": 1.1,\r\n  \"PrivateDescription\": \"Private Pacman redeem\",\r\n  \"Description\": \"Transfer from wallet to DDA\",\r\n  \"Time\": \"2019/08/06 10:05:03 EST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/deposit/request",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"deposit",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deposite Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ReferenceId\": \"gf4cfc1c-b563-47df-93e6-7d13647dc39l\",\r\n  \"Description\": \"Transfer from wallet to DDA\",\r\n  \"Time\": \"2019/08/06 10:05:03 EST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/deposit/status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"deposit",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6. Redeem",
+			"item": [
+				{
+					"name": "Redeem Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Wallet\": \"0x48652dee06eb85b9ac8f6227f70377d9d1343267\",\r\n  \"Amount\": 1.1,\r\n  \"PrivateDescription\": \"Private Pacman -redeem\",\r\n  \"Description\": \"Transfer from wallet to -DDA\",\r\n  \"Time\": \"2019/08/06 10:05:03 EST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/redeem/request",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"redeem",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Redeem Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Time",
+								"value": "2019/08/06 10:05:03 EST",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ReferenceId\": \"gf4cfc1c-b563-47df-93e6-7d13647dc39l\",\r\n  \"Description\": \"Transfer from wallet to DDA\",\r\n  \"Time\": \"2019/08/06 10:05:03 EST\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/redeem/status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"redeem",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7. Send",
+			"item": [
+				{
+					"name": "Send Request",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"SenderWallet\": \"0xb946968b4df0d3721852ac853929f0feb9e9299d\",\r\n  \"RecipientWallet\": \"0xb946968b4df0d3721852ac853929f0feb9e9300e\",\r\n  \"Amount\": 1,\r\n  \"PrivateDescription\": \"Test Send\",\r\n  \"PublicDescription\": \"Test Send\",\r\n  \"Description\": \"Transfer of Tokens.\",\r\n  \"Time\": \"2019/07/31 10:05:03 UTC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/send/request",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"send",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Redeem Status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Time",
+								"value": "2019/08/06 10:05:03 EST",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"ReferenceId\": \"zw6cfc1c-b563-47df-93e6-7d13647dc40m\",\r\n  \"Description\": \"Check status of Transfer of Tokens\",\r\n  \"Time\": \"2019/07/31 10:05:03 UTC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/send/status",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"send",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "8. Wallet balance",
+			"item": [
+				{
+					"name": "Wallet balance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/walletbalance?Wallet=0x48652dee06eb85b9ac8f6227f70377d9d1343267&Time={{timestamp}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"walletbalance"
+							],
+							"query": [
+								{
+									"key": "Wallet",
+									"value": "0x48652dee06eb85b9ac8f6227f70377d9d1343267"
+								},
+								{
+									"key": "Time",
+									"value": "{{timestamp}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "9. Transactions",
+			"item": [
+				{
+					"name": "Transactions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"Start\": \"2023/06/25 10:05:03 UTC\",\r\n  \"End\": \"2023/06/28 10:05:03 UTC\",\r\n  \"Options\": {\r\n    \"pageNo\": 1,\r\n    \"wallet\": \"0x48652dee06eb85b9ac8f6227f70377d9d1343267\"\r\n  },\r\n  \"Time\": \"2019/07/31 10:05:03 UTC\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/transactions",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "10. Client Data",
+			"item": [
+				{
+					"name": "Client Data",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/clientdata?walletnames=true",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"clientdata"
+							],
+							"query": [
+								{
+									"key": "walletnames",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "11. Wallet Names",
+			"item": [
+				{
+					"name": "Wallet Names",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const cdSchema = {\r",
+									"\t\"type\": \"object\",\r",
+									"    \t\"properties\": {\r",
+									"        \t\"Msg\": { \"type\": \"string\" },\r",
+									"\t\t\"RequestStatus\": {\"type\": \"string\"},\r",
+									"\t\t\"Wallet\": {\"type\": \"string\"},\r",
+									"\t\t\"Amount\": {\"type\": \"number\"},\r",
+									"\t\t\"Status\": {\"type\": \"string\"},\r",
+									"\t\t\"Time\": {\"type\": \"string\"},\r",
+									"\t},\r",
+									"\t\"required\": [\"Msg\",\"RequestStatus\", \"Wallet\", \"Amount\", \"Status\", \"Time\"],\r",
+									"\t\"additionalProperties\": false\r",
+									"};\r",
+									"\r",
+									"pm.test(\"Response is JSON\", function () {\r",
+									"   pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Schema is valid\",function(){\r",
+									"    pm.response.to.have.jsonSchema(cdSchema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "user_token",
+								"value": "ZXlKMGVYQWlPaUpLVjFRaUxDSmhiR2NpT2lKSVV6STFOaUo5LmV5SnpkV0lpT2lJeU1ESXpNREl4TXpBNE1EQXdNRGszTlNJc0ltbHpjeUk2SW1aMWJHeGhZMk5sYzNOdVlXTkJVRWtpTENKdVlXMWxJam9pVFc5b2JtRXlJRXR5YVhOb2JtRXlJaXdpYVdGMElqb3hOamMyTXpnNE1qSTFmUS41QmIzd1BERTdwekU5cVZGY2VNMXVmaHAxSkZ3cWd4cXpONlRfTkpaTTJn",
+								"type": "text"
+							},
+							{
+								"key": "UUID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "SourceId",
+								"value": "{{source_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/tassat-client-eapi/api/v1/walletnames?Wallet=0x48652dee06eb85b9ac8f6227f70377d9d1343267&NameTest=WAB ",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tassat-client-eapi",
+								"api",
+								"v1",
+								"walletnames"
+							],
+							"query": [
+								{
+									"key": "Wallet",
+									"value": "0x48652dee06eb85b9ac8f6227f70377d9d1343267"
+								},
+								{
+									"key": "NameTest",
+									"value": "WAB "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "https://api-connect.westernalliancebanktest.com"
+		},
+		{
+			"key": "entClientId",
+			"value": ""
+		},
+		{
+			"key": "entClientSecret",
+			"value": ""
+		},
+		{
+			"key": "tassat_client_id",
+			"value": ""
+		},
+		{
+			"key": "tassat_client_secret",
+			"value": ""
+		},
+		{
+			"key": "audience",
+			"value": ""
+		},
+		{
+			"key": "source_id",
+			"value": ""
+		},
+		{
+			"key": "confirm_code",
+			"value": ""
+		},
+		{
+			"key": "entToken",
+			"value": ""
+		},
+		{
+			"key": "access_token",
+			"value": ""
+		},
+		{
+			"key": "usertoken",
+			"value": ""
+		},
+		{
+			"key": "timestamp",
+			"value": "2023/03/10 14:13:28 UTC"
+		}
+	]
+}

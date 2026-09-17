@@ -1,0 +1,287 @@
+openapi: 3.1.0
+info:
+  title: Western Alliance Bank Wires Request API
+  version: v1
+  description: 'Submits a wire transfer request (Fedwire or other method of payment) from a virtual account.
+
+
+    Derived mechanically from the ''Wires Request API'' Postman collection published on the WAB API Developer Portal (family:
+    Transactional APIs). Every path, header, query parameter and request body comes from that collection; response bodies
+    are not captured because the collection ships none.'
+  contact:
+    name: Western Alliance Bank API Developer Portal
+    url: https://developer.westernalliancebank.com/s/
+  termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  x-family: Transactional
+  x-generated-from: postman
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  x-source-page: https://developer.westernalliancebank.com/s/postman-collection
+  x-provenance:
+    generated: '2026-09-17'
+    method: derived
+    source: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+    note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
+servers:
+- url: https://api-connect.westernalliancebank.com
+  description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+tags:
+- name: Get Token
+- name: Health Check
+- name: Wires Request API
+paths:
+  /entitlements-get-token-eapi/api/v1/token:
+    get:
+      operationId: getToken
+      summary: Get token
+      tags:
+      - Get Token
+      parameters:
+      - name: Scope
+        in: query
+        required: true
+        schema:
+          type: string
+        example: Informational
+      - name: appClientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (appClientId); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: appClientSecret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (appClientSecret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /trnsct-wires-rqst-eapi/api/v1/healthcheck:
+    get:
+      operationId: healthcheck
+      summary: Healthcheck
+      tags:
+      - Health Check
+      parameters:
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      - name: X-Dependent-Ping
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 'false'
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /trnsct-wires-rqst-eapi/api/v1/wires/transferRequest:
+    put:
+      operationId: wiresRequestAPI
+      summary: Wires Request API
+      tags:
+      - Wires Request API
+      parameters:
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SystemIdentifier:
+                  type: string
+                WireConfirmationNumber:
+                  type: string
+                MethodOfPayment:
+                  type: string
+                ProcessingDate:
+                  type: string
+                Amount:
+                  type: string
+                Currency:
+                  type: string
+                VirtualAccountNumber:
+                  type: string
+                VirtualAccountName:
+                  type: string
+                VirtualAccountAddress1:
+                  type: string
+                VirtualAccountAddress2:
+                  type: string
+                VirtualAccountAddress3:
+                  type: string
+                OriginationAccountNumber:
+                  type: string
+                PaymentInformationCode:
+                  type: string
+                Intermediary1BankName:
+                  type: string
+                Intermediary1BankId:
+                  type: string
+                BeneficiaryAccountNumber:
+                  type: string
+                OBI:
+                  type: string
+                ProcessingInstruction:
+                  type: string
+                OriginatorName:
+                  type: string
+                OriginatorBankRoutingNumber:
+                  type: string
+                OriginatorAddress1:
+                  type: string
+                OriginatorAddress2:
+                  type: string
+                OriginatorAddress3:
+                  type: string
+                BeneficiaryBankIdType:
+                  type: string
+                BeneficiaryBankId:
+                  type: string
+                BeneficiaryName:
+                  type: string
+                BeneficiaryAddress1:
+                  type: string
+                BeneficiaryAddress2:
+                  type: string
+                BeneficiaryAddress3:
+                  type: string
+                BeneficiaryCountry:
+                  type: string
+                BeneficiaryBankAddress1:
+                  type: string
+                BeneficiaryBankAddress2:
+                  type: string
+                BeneficiaryBankAddress3:
+                  type: string
+                Intermediary2BankIdType:
+                  type: string
+                Intermediary2BankId:
+                  type: string
+                Intermediary2BankName:
+                  type: string
+                Intermediary2BankAddress1:
+                  type: string
+                Intermediary2BankAddress2:
+                  type: string
+                Intermediary2BankAddress3:
+                  type: string
+                Intermediary1BankIdType:
+                  type: string
+                Intermediary1BankAddress1:
+                  type: string
+                Intermediary1BankAddress2:
+                  type: string
+                Intermediary1BankAddress3:
+                  type: string
+            example:
+              SystemIdentifier: BIN
+              WireConfirmationNumber: BIN2975658797
+              MethodOfPayment: FED
+              ProcessingDate: '20221016'
+              Amount: '00000000000000505'
+              Currency: USD
+              VirtualAccountNumber: '1234567'
+              VirtualAccountName: VAN-ACCName
+              VirtualAccountAddress1: 123, ABC Lane
+              VirtualAccountAddress2: AZ
+              VirtualAccountAddress3: ''
+              OriginationAccountNumber: '8010334723'
+              PaymentInformationCode: CTR
+              Intermediary1BankName: WESTERN ALLIANCE BANK
+              Intermediary1BankId: '222105980'
+              BeneficiaryAccountNumber: '123456'
+              OBI: ''
+              ProcessingInstruction: ''
+              OriginatorName: Test Company
+              OriginatorBankRoutingNumber: '132402104'
+              OriginatorAddress1: ''
+              OriginatorAddress2: Ste 1400
+              OriginatorAddress3: Phoenix, AZ 85004
+              BeneficiaryBankIdType: FW
+              BeneficiaryBankId: '222105980'
+              BeneficiaryName: Test Group
+              BeneficiaryAddress1: 1234 Anywhere St, Laveen
+              BeneficiaryAddress2: AZ,85339
+              BeneficiaryAddress3: AMM
+              BeneficiaryCountry: US
+              BeneficiaryBankAddress1: PHOENIX
+              BeneficiaryBankAddress2: AZ
+              BeneficiaryBankAddress3: ''
+              Intermediary2BankIdType: ''
+              Intermediary2BankId: ''
+              Intermediary2BankName: ''
+              Intermediary2BankAddress1: ''
+              Intermediary2BankAddress2: ''
+              Intermediary2BankAddress3: ''
+              Intermediary1BankIdType: ''
+              Intermediary1BankAddress1: ''
+              Intermediary1BankAddress2: ''
+              Intermediary1BankAddress3: ''
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the
+        appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+    appClientId:
+      type: apiKey
+      in: header
+      name: appClientId
+      description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+    appClientSecret:
+      type: apiKey
+      in: header
+      name: appClientSecret
+      description: Client Secret known only to the client and the WAB API gateway.

@@ -1,0 +1,224 @@
+{
+	"info": {
+		"_postman_id": "31998d41-80cf-4684-8fa9-4377d6538782",
+		"name": "ACH EAPI | Beta",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28579442"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"item": [
+				{
+					"name": "Get Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"entToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-Id",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "AppClientId",
+								"value": "{{AppClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "AppClientSecret",
+								"value": "{{AppClientSecret}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/entitlements-get-token-eapi/api/v1/token?Scope=Informational",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"entitlements-get-token-eapi",
+								"api",
+								"v1",
+								"token"
+							],
+							"query": [
+								{
+									"key": "Scope",
+									"value": "Informational"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Healthcheck",
+			"item": [
+				{
+					"name": "Healthcheck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-Id",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Dependent-Ping",
+								"value": "true",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{host}}/trnsct-ach-eapi/api/v1/healthcheck",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trnsct-ach-eapi",
+								"api",
+								"v1",
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ACH Request",
+			"item": [
+				{
+					"name": "ACH Request UAT",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{entToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Correlation-Id",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"BatchHeader\": {\r\n        \"StandardEntryClassCode\": \"PPD\",\r\n        \"DebitORCredit\": \"Credit\",\r\n        \"CompanyEntryDescription\": \"Payroll\",\r\n        \"EffectiveEntryDate\": \"2023-06-02\",\r\n        \"CompanyDescriptiveDate\": \"2023-01-11\",\r\n        \"CompanyName\": \"DDRpvtltd\",\r\n        \"CompanyIdentification\": \"6340360466\",\r\n        \"OriginatingDFIIdentification\": \"12210598\"\r\n    },\r\n    \"EntryDetail\": [\r\n        {\r\n\r\n            \"ReceiverName\": \"R\",\r\n            \"EntryConfirmationNumber\": \"130656789012\",\r\n            \"ReceivingAccountType\": \"27\",\r\n            \"ReceivingAccountNumber\": \"9832523532\",\r\n            \"ReceiverRoutingNumber\": \"133756121\",\r\n            \"ReceiverIdentificationNumber\": \"111122223333121\",\r\n            \"Amount\": \"496600\",\r\n            \"VirtualAccountName\": \"\",\r\n            \"VirtualAccountNumber\": \"\",\r\n            \"TraceNumber\": \"123456989090100\",\r\n            \"AddendaDetails\": \"TRN*1*12345*1512345678*999999999\",\r\n            \"PaymentTypeCode\": \"S\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/trnsct-ach-eapi/api/v1/achRequest",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"trnsct-ach-eapi",
+								"api",
+								"v1",
+								"achRequest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "AppClientId",
+			"value": "7c1b824a2c324ea4977906580619ddd2",
+			"type": "default"
+		},
+		{
+			"key": "AppClientSecret",
+			"value": "cfB67e808E9947Cf9565bCa054bB1708",
+			"type": "default"
+		},
+		{
+			"key": "env",
+			"value": "qa",
+			"type": "default"
+		},
+		{
+			"key": "host",
+			"value": "https://api-connect.westernalliancebanktest.com",
+			"type": "string"
+		},
+		{
+			"key": "entToken",
+			"value": ""
+		}
+	]
+}

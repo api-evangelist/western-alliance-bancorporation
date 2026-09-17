@@ -1,0 +1,229 @@
+{
+	"info": {
+		"_postman_id": "cba4a72c-5668-4125-ad0a-6ef210c783c6",
+		"name": "All Account Balance API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"item": [
+				{
+					"name": "Get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"BearerToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "appClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "appClientSecret",
+								"value": "{{ClientSecret}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_TOKEN_SERVICE}}/token?Scope=Informational",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_TOKEN_SERVICE}}"
+							],
+							"path": [
+								"token"
+							],
+							"query": [
+								{
+									"key": "Scope",
+									"value": "Informational"
+								},
+								{
+									"key": "Resource",
+									"value": "https://microsoft.graph.com",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Healthcheck",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-Id",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-Dependent-Ping",
+								"value": "false",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_BALANCE_SERVICE}}/healthcheck",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_BALANCE_SERVICE}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Get Balance",
+			"item": [
+				{
+					"name": "Get balance",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-Id",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_BALANCE_SERVICE}}/dp/accounts/balance",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_BALANCE_SERVICE}}"
+							],
+							"path": [
+								"dp",
+								"accounts",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BearerToken",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "PUBLIC_HOST",
+			"value": "api-connect.westernalliancebank.com",
+			"type": "default"
+		},
+		{
+			"key": "ClientSecret",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "ClientId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "BASE_PATH_BALANCE_SERVICE",
+			"value": "/info-multi-acc-balance-eapi/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "BASE_PATH_TOKEN_SERVICE",
+			"value": "/entitlements-get-token-eapi/api/v1",
+			"type": "default"
+		}
+	]
+}

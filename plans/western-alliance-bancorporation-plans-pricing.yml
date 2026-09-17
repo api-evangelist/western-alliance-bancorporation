@@ -1,42 +1,69 @@
 specification: API Commons Plans
 specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#//Plans
 provider: Western Alliance Bancorporation
 providerId: western-alliance-bancorporation
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-17'
+generated: '2026-09-17'
+method: searched
+source: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+reconciled: true
+plan_count: 1
 tags:
   - Banking
-  - Financial Services
+  - Treasury Management
   - Contact Sales
-description: Western Alliance Bancorporation does not publish a public API pricing or developer-portal page. Banking integrations are arranged through commercial / treasury banking relationships, partner programs, and procurement contracts. Pricing is negotiated as part of those agreements rather than offered as a self-serve catalog.
+description: >-
+  Western Alliance Bank does not sell API access as a priced product. The API Services Terms & Conditions (v6, May 14
+  2025) state in section 11 "No Fees" that no license fees or other payments are due for the API rights themselves;
+  WAB "may charge service fees, in accordance with its standard schedule of fees and charges, related to the
+  underlying transactions and activities" (the Business Banking and Related Services Schedule of Fees and Charges,
+  section 4). Access is granted through Treasury Management enrollment and a Setup Form; the developer portal has
+  self-registration but the API products require approval.
 sources:
-  - https://www.westernalliancebancorp.com
-notes: No public developer portal or self-serve API pricing was discoverable at developer.westernalliancebancorp.com (connection refused) or on the corporate site. API access appears to be partner / commercial-banking relationship driven. Scaffold trimmed to a single Contact Sales plan; revisit when the bank publishes a developer program.
+  - https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  - https://developer.westernalliancebank.com/s/login/SelfRegister
+notes: >-
+  Replaces the 2026-05-04 scaffold, which pre-dated the discovery of the WAB API Developer Portal. Transaction fee
+  amounts live in the bank's fee schedule, which is a client document and not published on the portal.
 plans:
-  - id: western-alliance-bancorporation-contact-sales
-    name: Contact Sales
+  - id: western-alliance-bancorporation-treasury-management-api
+    name: Treasury Management API Services
     type: enterprise
-    description: All API / integration access is negotiated through Western Alliance Bancorporation's commercial banking, treasury management, or partner channels. Terms, fees, and limits are contract-specific.
+    description: >-
+      Royalty-free, limited, revocable, non-exclusive licence to the API and API Products for enrolled Treasury
+      Management clients (Terms 3(a)). No API licence fee; per-transaction service fees per the bank's standard
+      schedule. Products are selected on the Setup Form (Informational, Transactional, Utility, Embedded Finance,
+      Digital Assets, Corporate Trust families).
     entries:
-      - label: Contracted Access
-        name: contracted_access
+      - label: API licence
+        name: api_licence
         type: flat
-        metric: varies
+        metric: licence
+        limit: -1
+        timeFrame: contract
+        geo: US
+        unit: 1
+        price: 0
+        currency: USD
+        userMultiplied: false
+      - label: Transaction service fees
+        name: transaction_fees
+        type: usage
+        metric: transaction
         limit: -1
         timeFrame: usage
         geo: US
         unit: 1
-        price: contact sales
+        price: per Business Banking and Related Services Schedule of Fees and Charges (not published)
         userMultiplied: false
     elements:
-      - name: Commercial / Treasury Banking Relationship
-      - name: Negotiated SLA
-      - name: Contract-Specific Limits
+      - name: Treasury Management Services Agreement
+      - name: Setup Form product selection
+      - name: Client UAT Environment
+      - name: Client ID / Client Secret / Client Certificate
+      - name: No support entitlement (Terms 10)
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,34 +1,43 @@
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#//RateLimits
 provider: Western Alliance Bancorporation
 providerId: western-alliance-bancorporation
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-17'
+generated: '2026-09-17'
+method: searched
+source: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+reconciled: true
+limit_count: 0
 tags:
   - Banking
-  - Financial Services
   - Rate Limiting
-  - Contact Sales
-description: Western Alliance Bancorporation does not publish API rate-limit documentation. Any throttling, quota, or burst behavior would be defined contractually as part of a commercial banking, treasury, or partner integration. No public numbers are available.
+description: >-
+  No numeric rate limits, quotas or rate-limit response headers are published. API Services Terms 6(d) reserve the
+  right to restrict "the number, frequency, and currency amount and/or volume of access requests"; limits "may be
+  identified in communications of WAB's approval of Company's access" and are subject to change at any time, and the
+  client must not exceed "reasonable request volume". Tokens are valid for a limited period (6(c)(iii)); the
+  lifetime is not published.
 sources:
-  - https://www.westernalliancebancorp.com
-notes: No public developer portal reachable; rate limits, headers, and response codes are not publicly documented. Single contract-scoped limit retained as a placeholder.
+  - https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  - https://developer.westernalliancebank.com/s/postman-collection
+notes: >-
+  Replaces the 2026-05-04 scaffold. None of the 15 published Postman collections shows an X-RateLimit-*,
+  RateLimit-* or Retry-After header, and no 429 example is documented anywhere; the 429 entry below is the
+  scaffold's assumption retained as unverified.
 responseCodes:
   throttled: 429
-limits:
-  - name: Contract-Defined Limits
-    scope: contract
-    metric: varies
-    limit: see contract / partner agreement
-    notes: Per-integration rate limits are agreed at contract time; no public rate-limit reference exists.
+  throttled_note: not documented by the provider - assumed HTTP default, unverified
+headers: []
+limits: []
 policies:
-  - name: Contract-Defined Throttling
-    description: Throttling, retry, and burst behavior are governed by the integration agreement. Clients should rely on standard exponential-backoff patterns and Retry-After when surfaced.
+  - name: Contract-communicated limits
+    description: >-
+      Per-client limits (request count, frequency, currency amount and volume) are set at approval time and
+      communicated directly to the enrolled company; they are not published and can change without notice.
+  - name: Token lifetime
+    description: Bearer tokens from /entitlements-get-token-eapi/api/v1/token expire after an unpublished period; clients must refresh.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

@@ -1,0 +1,189 @@
+generated: '2026-09-17'
+method: searched
+source: https://developer.westernalliancebank.com/s/postman-collection
+note: Western Alliance Bank publishes one Postman v2.1 collection per API product on its WAB API Developer Portal
+  (Salesforce Experience Cloud CMS). The portal pages are JS-rendered and the CMS document pages answer with an
+  SPA shell, but the underlying files are served anonymously by the Salesforce CMS delivery endpoint /sfsites/c/cms/delivery/media/<id>,
+  discovered through the portal sitemap (https://developer.westernalliancebank.com/s/sitemap-managedcontent-cms_document-1.xml).
+  Each collection was fetched verbatim (200, application/json) and is the source the openapi/ specs were mechanically
+  derived from. The two beta collections carry the provider's own published example AppClientId/AppClientSecret
+  values for the UAT host; 0-working/sanitize-secrets.py found no secret-shaped tokens and the files are kept verbatim
+  as the provider serves them. The Intrabank Transfer API has no collection - its user guide PDF is saved alongside.
+workspace_style: portal-hosted files (no public postman.com workspace; https://www.postman.com/westernalliancebank
+  answers a generic Postman page)
+collections:
+- key: ach-eapi-beta
+  name: ACH EAPI | Beta
+  postman_id: 31998d41-80cf-4684-8fa9-4377d6538782
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/ach-eapi-beta-postman-collection-MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  file: western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: all-account-balance-api
+  name: All Account Balance API
+  postman_id: cba4a72c-5668-4125-ad0a-6ef210c783c6
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/all-account-balance-api-postman-collection-MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  file: western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: all-account-intraday-api
+  name: All Account Intraday API
+  postman_id: 9e55f052-5561-4d6d-ad1f-825326640cd4
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/all-account-intraday-api-postman-collection-MCTBLJSWMUVNHTFBJPOEF66G32DM
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  file: western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: all-account-priorday-api
+  name: All Account Priorday API
+  postman_id: a0d193fd-d8c1-4934-a282-379e24834a2b
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/all-account-priorday-api-postman-collection-MCCBJDRO525BECXI4ZTVWZE7SZLM
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  file: western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: bank-statement-api
+  name: Bank Statement API
+  postman_id: ed4f1e95-3b43-47e4-9e54-7acc2ebbd28d
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/bank-statement-api-postman-collection-MCHF55PTNWUBDDJNICFRIXXGGNXM
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  file: western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: book-transfer-api
+  name: Book Transfer API
+  postman_id: 6f5715cb-0ed8-4da1-aad3-6ef30ceb102f
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/book-transfer-api-postman-collection-MC7LBVXMMYIJAXBABHXRZSLULAPM
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC7LBVXMMYIJAXBABHXRZSLULAPM
+  file: western-alliance-bancorporation-book-transfer-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: check-image-api
+  name: Check image API
+  postman_id: 46829ea9-8222-49c8-bd29-ec67adc3ad96
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/check-image-api-postman-collection-MCHEOWJRLBUVGAZJ6PKRUB7QZUUA
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHEOWJRLBUVGAZJ6PKRUB7QZUUA
+  file: western-alliance-bancorporation-check-image-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-check-image-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: date-range-transactions-api
+  name: Date Range Transactions API
+  postman_id: 69a142b6-8fad-4800-9fb0-eab0e1ef7e10
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/date-range-transactions-api-postman-collection-MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  file: western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: single-account-balance-api
+  name: Single Account Balance API
+  postman_id: 948803ef-7e52-454e-ac4c-a10a216fcf7d
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/single-account-balance-api-postman-collection-MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  file: western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: single-account-intraday-api
+  name: Single Account Intraday API
+  postman_id: 97f35aab-8373-49ab-a7b7-9fbf4782f4b6
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/single-account-intraday-api-postman-collection-MCHRUUIGS4ORD63N42SXUMN77YY4
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  file: western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: single-account-priorday-api
+  name: Single Account Priorday API
+  postman_id: f52dddbe-76d9-40ad-abc7-7621aacff2c1
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/single-account-priorday-api-postman-collection-MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  file: western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: stop-payments-api
+  name: Stop Payments API
+  postman_id: a76884d2-469b-491c-aa89-010aceaca434
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/stop-payments-api-postman-collection-MCTNG5FV64WBCTTMAE3ERIDE7XYU
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTNG5FV64WBCTTMAE3ERIDE7XYU
+  file: western-alliance-bancorporation-stop-payments-api.postman_collection.json
+  requests: 4
+  openapi: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: tassatpay-eapi-beta
+  name: TassatPay EAPI | Beta
+  postman_id: 2edd25aa-711d-4f4c-aa11-408a19460674
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/tassatpay-eapi-beta-postman-collection-MCDRH2RZ55TBHADOEWYZPCUOVROM
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  file: western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  requests: 16
+  openapi: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: token-api
+  name: Token API
+  postman_id: 62c26e90-5b92-4839-80fc-552d4e5c525c
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/token-api-postman-collection-MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  file: western-alliance-bancorporation-token-api.postman_collection.json
+  requests: 2
+  openapi: openapi/western-alliance-bancorporation-token-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+- key: wires-request-api
+  name: Wires Request API
+  postman_id: 93ab7bf3-493d-4bbe-9ec6-27f462bc0a3e
+  schema: https://schema.getpostman.com/json/collection/v2.1.0/collection.json
+  page: https://developer.westernalliancebank.com/s/cms-document/wires-request-api-postman-collection-MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  collection_json: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  file: western-alliance-bancorporation-wires-request-api.postman_collection.json
+  requests: 3
+  openapi: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
+  http_status: 200
+  content_type: application/json
+documents:
+- key: intrabank-transfer-api-user-guide
+  name: Intrabank Transfer API User Guide (External), Western Alliance Bank (c) 11.25
+  page: https://developer.westernalliancebank.com/s/cms-document/user-guide-wab-intrabank-transfer-api-MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+  url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+  file: western-alliance-bancorporation-intrabank-transfer-api-user-guide.pdf
+  http_status: 200
+  content_type: application/pdf
+  pages: 28
+  openapi: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml

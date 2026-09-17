@@ -1,0 +1,953 @@
+openapi: 3.1.0
+info:
+  title: Western Alliance Bank TassatPay EAPI
+  version: v1
+  description: 'Beta. Client gateway to the TassatPay blockchain-based real-time B2B payments network: wallet balances, deposits
+    (wallet to DDA), redemptions, sends between wallets, transactions and wallet names.
+
+
+    Derived mechanically from the ''TassatPay EAPI | Beta'' Postman collection published on the WAB API Developer Portal (family:
+    Digital Assets APIs). Every path, header, query parameter and request body comes from that collection; response bodies
+    are not captured because the collection ships none.'
+  contact:
+    name: Western Alliance Bank API Developer Portal
+    url: https://developer.westernalliancebank.com/s/
+  termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  x-family: Digital Assets
+  x-generated-from: postman
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  x-source-page: https://developer.westernalliancebank.com/s/postman-collection
+  x-provenance:
+    generated: '2026-09-17'
+    method: derived
+    source: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+    note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
+    collection_quirks:
+    - Path '/tassat-client-eapi{envKey}/api/v1/usertoken' carries the collection's undefined {{envKey}} variable verbatim
+      (User Token/Wallets).
+  x-status: beta
+servers:
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms) — the collection
+    as published targets this host (env=qa)
+- url: https://api-connect.westernalliancebank.com
+  description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+tags:
+- name: Get WAB Token
+- name: Get Tassat Login Token
+- name: Get User Token
+- name: Balance
+- name: Deposite
+- name: Redeem
+- name: Send
+- name: Wallet balance
+- name: Transactions
+- name: Client Data
+- name: Wallet Names
+paths:
+  /entitlements-get-token-eapi/api/v1/token:
+    get:
+      operationId: entitltmentsGetToken
+      summary: Entitltments Get token
+      tags:
+      - Get WAB Token
+      parameters:
+      - name: Scope
+        in: query
+        required: true
+        schema:
+          type: string
+        example: Informational
+      - name: AppClientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (AppClientId); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: AppClientSecret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (AppClientSecret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: x-correlation-id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/login:
+    post:
+      operationId: loginRequest
+      summary: Login Request
+      tags:
+      - Get Tassat Login Token
+      parameters:
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+    get:
+      operationId: loginStatus
+      summary: Login Status
+      tags:
+      - Get Tassat Login Token
+      parameters:
+      - name: audience
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: Time
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: client_id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (client_id); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: client_secret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (client_secret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi{envKey}/api/v1/usertoken:
+    get:
+      operationId: userTokenWallets
+      summary: User Token/Wallets
+      tags:
+      - Get User Token
+      parameters:
+      - name: envKey
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Time
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: pageNo
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '1'
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: ApiConfirmCode
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (ApiConfirmCode); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: client_id
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (client_id); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: client_secret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (client_secret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/balance:
+    post:
+      operationId: balanceRequest
+      summary: Balance Request
+      tags:
+      - Balance
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Wallet:
+                  type: string
+                Time:
+                  type: string
+            example:
+              Wallet: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+              Time: 2019/07/31 10:05:03 UTC
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+    get:
+      operationId: balanceBalanceRequest
+      summary: Balance Request
+      tags:
+      - Balance
+      parameters:
+      - name: Wallet
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+      - name: Time
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/deposit/request:
+    post:
+      operationId: depositeRequest
+      summary: Deposite Request
+      tags:
+      - Deposite
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Wallet:
+                  type: string
+                Amount:
+                  type: number
+                PrivateDescription:
+                  type: string
+                Description:
+                  type: string
+                Time:
+                  type: string
+            example:
+              Wallet: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+              Amount: 1.1
+              PrivateDescription: Private Pacman redeem
+              Description: Transfer from wallet to DDA
+              Time: 2019/08/06 10:05:03 EST
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/deposit/status:
+    post:
+      operationId: depositeStatus
+      summary: Deposite Status
+      tags:
+      - Deposite
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ReferenceId:
+                  type: string
+                Description:
+                  type: string
+                Time:
+                  type: string
+            example:
+              ReferenceId: gf4cfc1c-b563-47df-93e6-7d13647dc39l
+              Description: Transfer from wallet to DDA
+              Time: 2019/08/06 10:05:03 EST
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/redeem/request:
+    post:
+      operationId: redeemRequest
+      summary: Redeem Request
+      tags:
+      - Redeem
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Wallet:
+                  type: string
+                Amount:
+                  type: number
+                PrivateDescription:
+                  type: string
+                Description:
+                  type: string
+                Time:
+                  type: string
+            example:
+              Wallet: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+              Amount: 1.1
+              PrivateDescription: Private Pacman -redeem
+              Description: Transfer from wallet to -DDA
+              Time: 2019/08/06 10:05:03 EST
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/redeem/status:
+    post:
+      operationId: redeemStatus
+      summary: Redeem Status
+      tags:
+      - Redeem
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Time
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 2019/08/06 10:05:03 EST
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ReferenceId:
+                  type: string
+                Description:
+                  type: string
+                Time:
+                  type: string
+            example:
+              ReferenceId: gf4cfc1c-b563-47df-93e6-7d13647dc39l
+              Description: Transfer from wallet to DDA
+              Time: 2019/08/06 10:05:03 EST
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/send/request:
+    post:
+      operationId: sendRequest
+      summary: Send Request
+      tags:
+      - Send
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                SenderWallet:
+                  type: string
+                RecipientWallet:
+                  type: string
+                Amount:
+                  type: integer
+                PrivateDescription:
+                  type: string
+                PublicDescription:
+                  type: string
+                Description:
+                  type: string
+                Time:
+                  type: string
+            example:
+              SenderWallet: '0xb946968b4df0d3721852ac853929f0feb9e9299d'
+              RecipientWallet: '0xb946968b4df0d3721852ac853929f0feb9e9300e'
+              Amount: 1
+              PrivateDescription: Test Send
+              PublicDescription: Test Send
+              Description: Transfer of Tokens.
+              Time: 2019/07/31 10:05:03 UTC
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/send/status:
+    post:
+      operationId: sendRedeemStatus
+      summary: Redeem Status
+      tags:
+      - Send
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: Time
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 2019/08/06 10:05:03 EST
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ReferenceId:
+                  type: string
+                Description:
+                  type: string
+                Time:
+                  type: string
+            example:
+              ReferenceId: zw6cfc1c-b563-47df-93e6-7d13647dc40m
+              Description: Check status of Transfer of Tokens
+              Time: 2019/07/31 10:05:03 UTC
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/walletbalance:
+    get:
+      operationId: walletBalance
+      summary: Wallet balance
+      tags:
+      - Wallet balance
+      parameters:
+      - name: Wallet
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+      - name: Time
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/transactions:
+    post:
+      operationId: transactions
+      summary: Transactions
+      tags:
+      - Transactions
+      parameters:
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Start:
+                  type: string
+                End:
+                  type: string
+                Options:
+                  type: object
+                  properties:
+                    pageNo:
+                      type: integer
+                    wallet:
+                      type: string
+                Time:
+                  type: string
+            example:
+              Start: 2023/06/25 10:05:03 UTC
+              End: 2023/06/28 10:05:03 UTC
+              Options:
+                pageNo: 1
+                wallet: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+              Time: 2019/07/31 10:05:03 UTC
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/clientdata:
+    get:
+      operationId: clientData
+      summary: Client Data
+      tags:
+      - Client Data
+      parameters:
+      - name: walletnames
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 'true'
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /tassat-client-eapi/api/v1/walletnames:
+    get:
+      operationId: walletNames
+      summary: Wallet Names
+      tags:
+      - Wallet Names
+      parameters:
+      - name: Wallet
+        in: query
+        required: true
+        schema:
+          type: string
+        example: '0x48652dee06eb85b9ac8f6227f70377d9d1343267'
+      - name: NameTest
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 'WAB '
+      - name: access_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: user_token
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: UUID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: SourceId
+        in: header
+        required: true
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the
+        appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+    appClientId:
+      type: apiKey
+      in: header
+      name: appClientId
+      description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+    appClientSecret:
+      type: apiKey
+      in: header
+      name: appClientSecret
+      description: Client Secret known only to the client and the WAB API gateway.

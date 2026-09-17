@@ -1,0 +1,201 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  https://developer.westernalliancebank.com/s/postman-collection (15 provider-published Postman collections fetched
+  from the portal CMS), the Intrabank Transfer API User Guide PDF
+  (https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4) and the
+  API Services Terms & Conditions v6
+  (https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf).
+  Cross-cutting semantics are read from what those artifacts actually show; nothing is asserted from the JS-rendered
+  portal pages, which serve no content anonymously.
+description: >-
+  How Western Alliance Bank's treasury-management APIs behave across every product: a two-step credential exchange,
+  GUID request correlation, page-key pagination on history reads, a client-assigned PaymentId that doubles as a
+  duplicate guard on the intrabank transfer, an errors[] envelope, ISO 20022-style status codes on the transfer
+  webhook, and no published rate-limit signaling.
+
+base_url: https://api-connect.westernalliancebank.com
+uat_base_url: https://api-connect.westernalliancebanktest.com
+api_style: >-
+  REST-style JSON over HTTPS on a MuleSoft gateway. Each product is its own "eapi" base path
+  (/info-*-eapi, /trnsct-*-eapi, /entitlements-get-token-eapi, /tassat-client-eapi) followed by /api/v1 (or /api/v2
+  for intraBankSearch). Resource paths use PascalCase/camelCase segments (dp/accounts/{AccountNumber}/transactions/priorDay)
+  and PascalCase JSON fields (PaymentId, OriginatorAccountId).
+
+authentication:
+  scheme: >-
+    appClientId + appClientSecret headers on GET /entitlements-get-token-eapi/api/v1/token?Scope=Informational,
+    then Authorization: Bearer <token> on every product call. Tokens are time-limited (Terms 6(c)(iii)). A WAB-issued
+    Client Certificate is required on servers that initiate funds transfers (Terms 6(c)(ii)).
+  docs: https://developer.westernalliancebank.com/s/get-token-tutorial
+  detail: authentication/western-alliance-bancorporation-authentication.yml
+
+request_tracing:
+  supported: true
+  header: X-Correlation-ID (also written X-Correlation-Id / x-correlation-id across collections)
+  format: client-generated GUID ({{$guid}} in every published request)
+  additional_headers:
+    X-Source-System: optional client system label (present, disabled by default, on most requests)
+    X-Dependent-Ping: 'true/false on every /healthcheck - whether the health check should also ping downstream dependencies'
+    SourceId: TassatPay beta - client source identifier
+    UUID: TassatPay beta - per-request GUID
+  note: >-
+    The health-check endpoints under every product (/…-eapi/api/v1/healthcheck) are the only unauthenticated-looking
+    reads, and even they carry the bearer token in the published collections.
+
+idempotency:
+  supported: true
+  coverage: partial
+  scope:
+  - initiateIntraBankTransfer
+  mechanism: >-
+    Client-assigned PaymentId in the request body of POST /trnsct-ibt-eapi/api/v1/transactions/intraBankTransfer.
+    A resubmitted PaymentId is refused with HTTP 409 {code: 409, message: Duplicate, additionalInfo: "Intrabank
+    transfer request already exists"}. After a transfer is "Cancelled while in Processing" the bank instructs the
+    client to "resubmit with new PaymentId" (400), which confirms the id is the replay guard.
+  key_format: client string (samples are date+sequence, e.g. 09232025124, or free text such as 2025UATTEST2)
+  retention: not published
+  conflict_behavior: 409 Duplicate; the original response is NOT replayed - the client must use the Search API to recover the PaymentMessageReference.
+  not_covered:
+  - bookTransfer (POST /info-book-transfer-eapi/api/v1/dp/transactions/transfer) - no idempotency key or reference field in the published body
+  - wiresRequestAPI (PUT /trnsct-wires-rqst-eapi/api/v1/wires/transferRequest) - carries a WireConfirmationNumber but no documented duplicate handling
+  - achRequestUAT (POST /trnsct-ach-eapi/api/v1/achRequest) - NACHA batch has no documented duplicate guard
+  - createStopPaymentOrder, TassatPay deposit/redeem/send requests - none documented
+  docs: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+  note: >-
+    Partial by the rubric definition: one of five documented write operations carries a replay guard, and it is a body
+    field rather than a header. The band gate must read coverage: partial, not the prose.
+
+pagination:
+  style: page-key (opaque continuation header) on history reads; page number on intrabank search
+  request_params:
+    X-Next-Page-Key: >-
+      request header on the intraday, prior-day and date-range transaction reads - carry forward the key from the
+      previous response to fetch the next page (present on every history request in the collections; the response
+      field name is not shown because the collections ship no saved responses)
+    page: required integer query parameter on POST /trnsct-ibt-eapi/api/v2/transactions/intraBankSearch (400 "Required query parameter page not specified" when omitted)
+  response_fields:
+    CurrentPage: intraBankSearch echoes the page path (e.g. /transactions/intraBankSearch?page=1)
+    TransactionCount: number of records on the page
+    Transactions: array of records
+  docs: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+
+filtering:
+  history_reads:
+    params: [BeginDate, EndDate, Amount, CheckNumber, CheckOrSerialNumber, TransactionCode, TransactionCodeList (max 10 codes), TransactionFilterType / FilterType / HistoryFilterType, TransactionDate, TimeDepositId, ReturnExtended, ResponseType]
+    note: parameter names differ between the intraday, prior-day and date-range products; each spec carries its own set verbatim.
+  intrabank_search:
+    rule: exactly one of ValueDate, PaymentId or PaymentMessageReference per call, with SystemIdentifier and the account; Type selects Beneficiary or Originator mode.
+
+field_expansion:
+  supported: false
+  note: no expand/fields/include parameter appears in any published request.
+
+metadata:
+  supported: false
+  note: >-
+    No free-form metadata object. The intrabank transfer carries RemittanceInformation (free text) and the client's
+    own PaymentId, and the Search API returns a BeneficiaryReference; these are the only client-controlled reference
+    fields.
+
+versioning:
+  scheme: path (/api/v1, /api/v2)
+  current: v1 for every product except intraBankSearch (v2)
+  beta_products: [ACH EAPI (Beta), TassatPay EAPI (Beta)]
+  policy: >-
+    API Services Terms section 10: WAB may update or modify the API at its sole discretion and may require the most
+    recent version; updates land in the Client UAT Environment before production; material production updates are
+    notified by email to the enrollment address and via Business Online Banking messages; continued use after an
+    update is acceptance; no support entitlement.
+  detail: lifecycle/western-alliance-bancorporation-lifecycle.yml
+
+error_envelope:
+  shape: '{"errors": [{"code": <int>, "message": "<short>", "additionalInfo": "<detail>"}]}'
+  status_codes_seen: [400, 403, 409]
+  in_band_status: >-
+    A 200 on the intrabank transfer can still carry Status: Rejected with a W-code (e.g. W21 "rejected due to invalid
+    debit account"); W02 = accepted. Agents must read Status/StatusCode, not just the HTTP code.
+  detail: errors/western-alliance-bancorporation-problem-types.yml
+
+rate_limiting:
+  published: false
+  headers: none documented
+  policy: >-
+    Terms 6(d): WAB may restrict "the number, frequency, and currency amount and/or volume" of requests; limits are
+    communicated at approval and are subject to change; clients must not exceed "reasonable request volume".
+  detail: rate-limits/western-alliance-bancorporation-rate-limits.yml
+
+amounts_and_dates:
+  amount_format: >-
+    zero-padded cents strings on the transfer products ("0124" = $1.24 on the intrabank request;
+    "00000000000000124" on the webhook; "00000000000000505" on wires). Book transfer uses a plain number
+    (TransactionAmount: 1). TassatPay uses decimals (Amount: 1.1).
+  date_format: yyyyMMdd on transfer requests (ProcessingDate), yyyy-MM-dd on searches and stop payments, "yyyy/MM/dd HH:mm:ss UTC" on TassatPay.
+
+webhooks:
+  supported: true
+  scope: Intrabank Transfer status (Confirmed ACSC / Rejected RJCT)
+  detail: asyncapi/western-alliance-bancorporation-webhooks.yml
+
+dry_run_mode:
+  grade: none
+  note: >-
+    No dry-run, validate-only or simulation flag is documented. The Client UAT Environment
+    (api-connect.westernalliancebanktest.com) is the rehearsal surface; the Terms require all UAT data to be fake or
+    masked.
+
+reversibility:
+  applicable: true
+  grade: none
+  note: >-
+    Five write surfaces exist and none publishes a reversal operation. The bank itself can cancel an intrabank transfer
+    while it is processing (the client learns this from a 400 "Cancelled while in Processing", an RJCT webhook with
+    FundTransferReasonCode MS01, or a StatusMessage "Cancelled" in Search results), but the client has no cancel,
+    reverse or recall call in any published collection or guide. The Stop Payments API halts a CHECK the client
+    issued, not an API write, so it is not counted as a reversal path. No window is asserted because none is stated.
+  write_surfaces:
+  - operation: initiateIntraBankTransfer
+    path: POST /trnsct-ibt-eapi/api/v1/transactions/intraBankTransfer
+    action: Move funds between two WAB accounts
+    reversal: none documented (bank-side cancellation only, reported via webhook / search)
+    window: null
+    grade: none
+  - operation: bookTransfer
+    path: POST /info-book-transfer-eapi/api/v1/dp/transactions/transfer
+    action: Book transfer between the client's own accounts
+    reversal: none documented
+    window: null
+    grade: none
+  - operation: wiresRequestAPI
+    path: PUT /trnsct-wires-rqst-eapi/api/v1/wires/transferRequest
+    action: Submit a wire (Fedwire) transfer request
+    reversal: none documented (Fedwire recall is a bank operations process, not an API)
+    window: null
+    grade: none
+  - operation: achRequestUAT
+    path: POST /trnsct-ach-eapi/api/v1/achRequest
+    action: Originate an ACH batch (beta)
+    reversal: none documented
+    window: null
+    grade: none
+  - operation: createStopPaymentOrder
+    path: POST /info-stop-payments-eapi/api/v1/dp/accounts/{AccountNumber}/stopPayments
+    action: Place a stop payment on a check or range
+    reversal: none documented (no release / cancel-stop call)
+    window: null
+    grade: none
+  - operation: depositeRequest / redeemRequest / sendRequest
+    path: POST /tassat-client-eapi/api/v1/{deposit,redeem,send}/request
+    action: TassatPay wallet deposit, redemption, wallet-to-wallet send (beta)
+    reversal: none documented (each has only a paired /status poll)
+    window: null
+    grade: none
+
+cross_links:
+  errors: errors/western-alliance-bancorporation-problem-types.yml
+  decline_codes: errors/western-alliance-bancorporation-decline-codes.yml
+  lifecycle: lifecycle/western-alliance-bancorporation-lifecycle.yml
+  authentication: authentication/western-alliance-bancorporation-authentication.yml
+  rate_limits: rate-limits/western-alliance-bancorporation-rate-limits.yml
+  webhooks: asyncapi/western-alliance-bancorporation-webhooks.yml
+  sandbox: sandbox/western-alliance-bancorporation-sandbox.yml

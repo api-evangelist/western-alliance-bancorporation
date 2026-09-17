@@ -1,0 +1,48 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  API Services Terms & Conditions v6, last modified May 14 2025, section 10 "No Support; Updates" and 6(d)
+  (https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf); the developer portal sitemap (https://developer.westernalliancebank.com/s/sitemap-view-1.xml) which lists
+  the /s/incident page and /s/news; versions read from the published Postman collections and user guide.
+versioning:
+  scheme: path
+  mechanism: /api/v1 (all products) and /api/v2 (Intrabank Search only) inside each product's -eapi base path
+  current:
+    v1: every product
+    v2: POST /trnsct-ibt-eapi/api/v2/transactions/intraBankSearch
+  beta:
+  - ACH EAPI (Beta) - published collection targets the UAT host only
+  - TassatPay EAPI (Beta) - published collection targets the UAT host only
+  notes: >-
+    The MuleSoft-style base paths (info-*, trnsct-*, entitlements-*, tassat-client-*) version each product
+    independently; there is no global API version header or date-based version.
+deprecation:
+  policy_url: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  policy_summary: >-
+    Section 10: WAB "may update or modify the API from time to time and at its sole discretion" and "may require
+    Company to obtain and use the most recent version of the API". Updates are made to the Client UAT Environment
+    before production; material production updates are notified by email to the enrollment address and/or via
+    Business Online Banking messages. Company bears the integration cost; continued use after an update is binding
+    acceptance. No fixed notice period, sunset schedule or support entitlement ("This Agreement does not entitle
+    Company to any support").
+  changelog: null
+  sunset_header: false
+  deprecation_header: false
+  notes: No RFC 8594 Sunset/Deprecation headers appear in any published request; no public changelog page exists on the portal (news is at /s/news, JS-rendered).
+sla:
+  url: null
+  public_uptime_target: null
+  notes: >-
+    No SLA is published. The Terms disclaim support entirely; availability commitments, if any, sit in the Treasury
+    Management Services Agreement, which is not public.
+status_page: https://developer.westernalliancebank.com/s/incident
+status_page_notes: >-
+  The portal sitemap lists /s/incident and the CMS carries severe-degradation, green, yellow and red status icons,
+  so an incident/status surface exists on the portal; the page is Salesforce-rendered and shows nothing to an
+  anonymous crawler (every /s/* path answers 200 with the same SPA shell). status.westernalliancebank.com does not
+  exist (404).
+health_checks:
+  note: Every product exposes GET /<product>-eapi/api/v1/healthcheck (bearer token + X-Dependent-Ping true|false) for client-side liveness checks.
+rate_limits: rate-limits/western-alliance-bancorporation-rate-limits.yml
+deprecated_products: []
+deprecated_operations: []

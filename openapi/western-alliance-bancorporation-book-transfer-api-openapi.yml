@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Western Alliance Bank Book Transfer API
+  version: v1
+  description: 'Moves funds between two Western Alliance accounts held by the same client (book transfer).
+
+
+    Derived mechanically from the ''Book Transfer API'' Postman collection published on the WAB API Developer Portal (family:
+    Transactional APIs). Every path, header, query parameter and request body comes from that collection; response bodies
+    are not captured because the collection ships none.'
+  contact:
+    name: Western Alliance Bank API Developer Portal
+    url: https://developer.westernalliancebank.com/s/
+  termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  x-family: Transactional
+  x-generated-from: postman
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC7LBVXMMYIJAXBABHXRZSLULAPM
+  x-source-page: https://developer.westernalliancebank.com/s/postman-collection
+  x-provenance:
+    generated: '2026-09-17'
+    method: derived
+    source: postman/western-alliance-bancorporation-book-transfer-api.postman_collection.json
+    note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
+    collection_quirks:
+    - Request 'Healthcheck' in folder 'Health Check' references an undefined collection variable in its host/base-path (api-connect.westernalliancebank.com{BASE_PATH_PRIORDAY_SERVICE})
+      and was NOT carried; the collection as published cannot resolve it.
+servers:
+- url: https://api-connect.westernalliancebank.com
+  description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+tags:
+- name: Get Token
+- name: Book Transfer
+paths:
+  /entitlements-get-token-eapi/api/v1/token:
+    get:
+      operationId: getToken
+      summary: Get token
+      tags:
+      - Get Token
+      parameters:
+      - name: Scope
+        in: query
+        required: true
+        schema:
+          type: string
+        example: Informational
+      - name: appClientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (appClientId); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: appClientSecret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (appClientSecret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /info-book-transfer-eapi/api/v1/dp/transactions/transfer:
+    post:
+      operationId: bookTransfer
+      summary: Book Transfer
+      tags:
+      - Book Transfer
+      parameters:
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                StandardDollarTransferData:
+                  type: object
+                  properties:
+                    FromAccountNumber:
+                      type: string
+                    TransactionAmount:
+                      type: integer
+                    FromTrailerDescription:
+                      type: string
+                    ToAccountNumber:
+                      type: string
+                    ToTrailerDescription:
+                      type: string
+            example:
+              StandardDollarTransferData:
+                FromAccountNumber: '{{From_AccountNumber}}'
+                TransactionAmount: 1
+                FromTrailerDescription: test source trailer description
+                ToAccountNumber: '{{To_AccountNumber}}'
+                ToTrailerDescription: test destination trailer description
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the
+        appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+    appClientId:
+      type: apiKey
+      in: header
+      name: appClientId
+      description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+    appClientSecret:
+      type: apiKey
+      in: header
+      name: appClientSecret
+      description: Client Secret known only to the client and the WAB API gateway.

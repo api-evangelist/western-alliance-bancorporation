@@ -1,0 +1,86 @@
+generated: '2026-09-17'
+method: searched
+source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+api: Western Alliance Bank Intrabank Transfer API
+summary: >-
+  Western Alliance Bank pushes a JSON webhook to a client-configured endpoint "almost immediately after the transfer
+  is processed" for intrabank transfers initiated through POST /trnsct-ibt-eapi/api/v1/transactions/intraBankTransfer.
+  The guide calls it "the primary confirmation tool"; the Search, Intraday and Prior Day APIs are fallbacks. No
+  AsyncAPI document is published, so this is a catalog of what the user guide documents - nothing more.
+delivery:
+  transport: https-post
+  content_type: application/json
+  configuration: webhook endpoint is set up with the bank during enrollment ("if you have set up a webhook endpoint"); no self-service registration API is published
+  signature: not documented
+  retries: not documented
+  dedup_field: PaymentMessageReference (with PaymentId as the client's own key)
+  masking: account numbers are masked to the last four digits (OriginatorAccountId "*1212", BeneficiaryAccountId "*1313")
+  common_fields:
+  - SystemIdentifier
+  - PaymentId
+  - PaymentMessageReference
+  - StatusCode
+  - StatusMessage
+  - TransferType
+  - Amount (zero-padded cents, 17 chars)
+  - Currency
+  - FundTransferDirection
+  - FundTransferReleaseDate (yyyyMMdd)
+  - FundTransferReleaseTime (HHmmss)
+  - RemittanceInformation
+  - OriginatorAccountId (masked)
+  - OriginatorName
+  - BeneficiaryAccountId (masked)
+  - BeneficiaryName
+events:
+- name: intrabank_transfer.confirmed
+  status_code: ACSC
+  status_message: Confirmed
+  transfer_type: FTRINF
+  description: The transfer was executed and recorded internally; money is moving.
+  example:
+    SystemIdentifier: ECG
+    PaymentId: '09232025124'
+    PaymentMessageReference: '526605645490'
+    StatusCode: ACSC
+    StatusMessage: Confirmed
+    TransferType: FTRINF
+    Amount: '00000000000000124'
+    Currency: USD
+    FundTransferDirection: O
+    FundTransferReleaseDate: '20250923'
+    FundTransferReleaseTime: '042159'
+    RemittanceInformation: TestTransaction
+    OriginatorAccountId: '*1212'
+    OriginatorName: INFORMATION SURVEILLANCE
+    BeneficiaryAccountId: '*1313'
+    BeneficiaryName: INTERNAL ACCOUNT
+- name: intrabank_transfer.rejected
+  status_code: RJCT
+  status_message: Rejected
+  transfer_type: FTRCAN
+  description: The transfer was rejected or cancelled; FundTransferReasonCode / FundTransferReasonDescription say why.
+  additional_fields: [FundTransferReasonCode, FundTransferReasonDescription]
+  example:
+    SystemIdentifier: GEM
+    PaymentId: '98481213454'
+    PaymentMessageReference: '527601355732'
+    StatusCode: RJCT
+    StatusMessage: Rejected
+    TransferType: FTRCAN
+    Amount: '00000000000024311'
+    Currency: USD
+    FundTransferDirection: O
+    FundTransferReleaseDate: '20251003'
+    FundTransferReleaseTime: '064753'
+    FundTransferReasonCode: MS01
+    FundTransferReasonDescription: Unable to process
+    RemittanceInformation: testing Intrabank Transfer API GEM
+    OriginatorName: WSB CORP LTD
+    OriginatorAccountId: '*4321'
+    BeneficiaryAccountId: '*6789'
+    BeneficiaryName: TOM HANK
+other_products:
+  note: >-
+    No webhook is documented for wires, ACH, book transfer, stop payments or TassatPay in the published collections;
+    TassatPay exposes paired /status polling endpoints instead.

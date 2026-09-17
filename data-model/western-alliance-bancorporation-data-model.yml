@@ -1,0 +1,125 @@
+generated: '2026-09-17'
+method: derived
+source: openapi/*.yml request bodies and path/query parameters, plus the identifier mapping table in the Intrabank
+  Transfer user guide (https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4)
+description: Entity graph implied by the treasury APIs. Response schemas are unpublished for most products, so entities
+  are read from request shapes and the guide's cross-endpoint identifier table (Payment ID, Payment Message Reference,
+  Beneficiary Reference, Transaction Control Number).
+entities:
+- name: Account
+  id_field: AccountNumber
+  also:
+  - OriginatorAccountId
+  - BeneficiaryAccountId
+  - AccountId
+  - FromAccountNumber
+  - ToAccountNumber
+  - VirtualAccountNumber
+  sources:
+  - single-account-*
+  - date-range-transactions
+  - check-image
+  - stop-payments
+  - book-transfer
+  - intrabank-transfer
+  - wires-request
+- name: Transaction
+  id_field: TransactionControlNumber / ImageId (prior-day and date-range) - equals '000' + PaymentMessageReference
+    for intrabank transfers
+  sources:
+  - '*-intraday'
+  - '*-priorday'
+  - date-range-transactions
+- name: IntraBankTransfer
+  id_field: PaymentMessageReference (system) + PaymentId (client)
+  also:
+  - BeneficiaryReference
+  - SystemIdentifier
+  sources:
+  - intrabank-transfer
+- name: BookTransfer
+  id_field: null
+  sources:
+  - book-transfer
+- name: WireRequest
+  id_field: WireConfirmationNumber
+  also:
+  - SystemIdentifier
+  - VirtualAccountNumber
+  sources:
+  - wires-request
+- name: ACHBatch
+  id_field: BatchHeader.CompanyIdentification + EffectiveEntryDate
+  children:
+  - EntryDetail
+  sources:
+  - ach-eapi-beta
+- name: StopPayment
+  id_field: SerialNumber (per AccountNumber)
+  sources:
+  - stop-payments
+- name: Statement
+  id_field: AccountNumber + Period
+  sources:
+  - bank-statement
+- name: CheckImage
+  id_field: AccountNumber + CheckNumber + CheckDate + TraceNumber + Amount
+  sources:
+  - check-image
+- name: Wallet
+  id_field: Wallet (0x address)
+  sources:
+  - tassatpay-eapi-beta
+- name: TassatTransfer
+  id_field: ReferenceId
+  kinds:
+  - deposit
+  - redeem
+  - send
+  sources:
+  - tassatpay-eapi-beta
+relationships:
+- from: Account
+  to: Transaction
+  type: has_many
+  via: AccountNumber
+- from: Account
+  to: StopPayment
+  type: has_many
+  via: AccountNumber
+- from: Account
+  to: Statement
+  type: has_many
+  via: AccountNumber
+- from: Account
+  to: CheckImage
+  type: has_many
+  via: AccountNumber
+- from: IntraBankTransfer
+  to: Account
+  type: belongs_to
+  via: OriginatorAccountId
+- from: IntraBankTransfer
+  to: Account
+  type: belongs_to
+  via: BeneficiaryAccountId
+- from: IntraBankTransfer
+  to: Transaction
+  type: has_one
+  via: PaymentMessageReference -> TransactionControlNumber (prefixed 000) / AdditionalInformation TRN-<ref>
+- from: BookTransfer
+  to: Account
+  type: belongs_to
+  via: FromAccountNumber / ToAccountNumber
+- from: WireRequest
+  to: Account
+  type: belongs_to
+  via: VirtualAccountNumber
+- from: ACHBatch
+  to: EntryDetail
+  type: has_many
+  via: EntryDetails[]
+- from: Wallet
+  to: TassatTransfer
+  type: has_many
+  via: Wallet / SenderWallet / RecipientWallet

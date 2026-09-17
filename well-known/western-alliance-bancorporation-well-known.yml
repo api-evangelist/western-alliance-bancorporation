@@ -1,0 +1,103 @@
+generated: '2026-09-17'
+method: probed
+source: live GET of /.well-known/* on every host the record knows (corporate domain + www, brand domain, developer portal, API gateway prod + UAT)
+note: >-
+  One real document served: developer.westernalliancebank.com/.well-known/openid-configuration (200, application/json,
+  issuer https://developer.westernalliancebank.com). It is the Salesforce Experience Cloud identity provider for the
+  portal login (scopes_supported is the Salesforce platform list), not the API gateway's token service, which uses
+  appClientId/appClientSecret headers. Every other /.well-known path on the portal answers 401 with a redirect to
+  /s/login (the Salesforce container gates non-/s/ paths); the corporate site answers 404 with a full HTML page;
+  the api-connect gateways answer 404 from nginx. No security.txt, api-catalog, oauth-authorization-server,
+  ai-plugin.json or agent card is published on any host.
+hosts:
+- host: developer.westernalliancebank.com
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    content_type: application/json;charset=UTF-8
+    file: western-alliance-bancorporation-openid-configuration.json
+    note: Salesforce Experience Cloud OIDC discovery for the portal login (platform-authored, served on the provider's host)
+  - path: /.well-known/security.txt
+    status: 401
+    note: redirects to /s/login?ec=302 - login-gated, not served
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+  - path: /.well-known/api-catalog
+    status: 401
+  - path: /.well-known/ai-plugin.json
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  - path: /llms.txt
+    status: 401
+  - path: /s/llms.txt
+    status: 404
+    note: Salesforce SPA shell (109 KB HTML) - not a document
+- host: www.westernalliancebancorporation.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/markdown; charset=utf-8
+    file: ../llms/western-alliance-bancorporation-llms.txt
+    note: corporate llms.txt (bank products and company pages; does not describe the API surface)
+- host: www.westernalliancebank.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 301
+    note: brand domain redirects to www.westernalliancebancorporation.com/.well-known/security.txt (404)
+- host: api-connect.westernalliancebank.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /openapi.json
+    status: 404
+  - path: /swagger.json
+    status: 404
+  - path: /
+    status: 403
+    note: gateway live (nginx 403 Forbidden for anonymous requests)
+- host: api-connect.westernalliancebanktest.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /
+    status: 403
+    note: UAT gateway live (nginx 403 Forbidden for anonymous requests)

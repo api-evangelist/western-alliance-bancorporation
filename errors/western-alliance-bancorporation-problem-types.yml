@@ -1,0 +1,58 @@
+generated: '2026-09-17'
+method: searched
+format: custom-errors-array
+source: >-
+  Intrabank Transfer API User Guide, section "3. Error Messages Index" (https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4), cross-checked against the
+  derived OpenAPI responses in openapi/. The Postman collections ship no saved responses, so only the intrabank
+  transfer and search errors are documented; other products share the same MuleSoft gateway but publish no error
+  reference anonymously. WAB does NOT use RFC 9457 application/problem+json.
+docs: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+envelope:
+  media_type: application/json
+  shape: '{ "errors": [ { "code": integer, "message": string, "additionalInfo": string } ] }'
+  note: >-
+    code repeats the HTTP status; message is a short label (Rejected, Duplicate, Unavailable, Not authorized for Intra
+    Bank transaction); additionalInfo carries the actionable detail. A separate in-band envelope
+    {Status, StatusCode, StatusMessage, PaymentId, PaymentMessageReference} is returned with HTTP 200 on the transfer
+    itself and can still say Status: Rejected (see errors/western-alliance-bancorporation-decline-codes.yml).
+problems:
+- status: 400
+  title: Rejected - Processing Date is Invalid
+  message: Rejected
+  additionalInfo: Processing Date is Invalid
+  operations: [initiateIntraBankTransfer]
+  remediation: Send ProcessingDate as yyyyMMdd for a valid processing day and resubmit.
+- status: 400
+  title: Rejected - Cancelled while in Processing
+  message: Rejected
+  additionalInfo: Intrabank transfer is rejected due to Cancelled while in Processing. Please resubmit with new PaymentId
+  operations: [initiateIntraBankTransfer]
+  remediation: The bank cancelled the in-flight transfer; resubmit with a NEW PaymentId (the old one is consumed).
+- status: 400
+  title: Required query parameter page not specified
+  message: Required query parameter page not specified
+  additionalInfo: Required query parameter page not specified
+  operations: [searchIntraBankTransfers]
+  remediation: Add ?page=1 (integer) to the search request.
+- status: 400
+  title: Unavailable - invalid search parameter combination
+  message: Unavailable
+  additionalInfo: Invalid search parameter. Either ValueDate or PaymentId or PaymentMessageReference will be accepted. Please provide any one of the aforementioned parameter along with SystemIdentifier and OriginatorAccountId.
+  operations: [searchIntraBankTransfers]
+  remediation: Send exactly one of ValueDate, PaymentId or PaymentMessageReference with SystemIdentifier and the account.
+- status: 403
+  title: Not authorized for Intra Bank transaction
+  message: Not authorized for Intra Bank transaction
+  additionalInfo: Please pass valid account details and/or system identifier
+  operations: [initiateIntraBankTransfer]
+  remediation: The account or SystemIdentifier is not entitled for intrabank transfers under the enrolled credentials; check the Setup Form entitlements.
+- status: 409
+  title: Duplicate PaymentId
+  message: Duplicate
+  additionalInfo: Intrabank transfer request already exists
+  operations: [initiateIntraBankTransfer]
+  remediation: Do not retry with the same PaymentId; look the transfer up with searchIntraBankTransfers (PaymentId filter) to recover its PaymentMessageReference.
+undocumented:
+  note: >-
+    401 (expired/invalid bearer token), 429 and 5xx behaviour are not documented in any anonymously published
+    artifact; the Terms only say tokens are time-limited and that access may be restricted.

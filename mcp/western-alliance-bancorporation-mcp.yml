@@ -1,0 +1,241 @@
+generated: '2026-09-17'
+method: derived
+status: candidate
+source: openapi/*.yml (derived from the provider's Postman collections and Intrabank Transfer user guide)
+summary: No official hosted or local MCP server was found for Western Alliance Bank. The developer portal (Salesforce
+  Experience Cloud) and gateway (MuleSoft) publish no MCP endpoint; the portal's Salesforce openid-configuration
+  lists an mcp_api scope, but that is the Salesforce platform's own scope list, not a WAB MCP surface. The tool
+  list below is a CANDIDATE derived one-per-operation from the captured OpenAPI so the crosswalk has something to
+  bind to; WAB does not publish it.
+search_result:
+  official_hosted_server: none
+  probes:
+  - url: https://mcp.westernalliancebank.com/mcp
+    method: POST tools/list
+    status: 404
+  - url: https://api-connect.westernalliancebank.com/mcp
+    method: POST tools/list
+    status: 404
+  - url: https://developer.westernalliancebank.com/mcp
+    method: POST tools/list
+    status: 404
+  registries: npm search 'western alliance bank' returns no first-party package; no @westernalliancebank scope;
+    no listing in the MCP registry
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: derived
+server:
+  name: wab-treasury-apis
+  transport: null
+  url: null
+auth:
+  type: apiKey+bearer
+  headers:
+  - appClientId
+  - appClientSecret
+  token_endpoint: GET https://api-connect.westernalliancebank.com/entitlements-get-token-eapi/api/v1/token?Scope=Informational
+  note: Every tool needs a Treasury Management enrollment; anonymous calls get 403.
+tools:
+- name: ach_request_uat
+  description: ACH Request UAT (Western Alliance Bank ACH EAPI)
+  source_operation: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml#POST /trnsct-ach-eapi/api/v1/achRequest
+  operationId: achRequestUAT
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: get_balance
+  description: Get balance (Western Alliance Bank All Account Balance API)
+  source_operation: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml#GET /info-multi-acc-balance-eapi/api/v1/dp/accounts/balance
+  operationId: getBalance
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: get_intraday_transactions
+  description: Get Intraday transactions (Western Alliance Bank All Account Intraday API)
+  source_operation: openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml#GET /info-multi-acc-intraday-eapi/api/v1/dp/accounts/transactions/intraday
+  operationId: getIntradayTransactions
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: get_priorday_transactions
+  description: Get Priorday transactions (Western Alliance Bank All Account Priorday API)
+  source_operation: openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml#GET /info-multi-acc-priorday-eapi/api/v1/dp/accounts/transactions/priorDay
+  operationId: getPriordayTransactions
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: bank_statements_api
+  description: Bank Statements API (Western Alliance Bank Bank Statement API)
+  source_operation: openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml#GET /info-bank-statements-eapi/api/v1/img/documents/statement
+  operationId: bankStatementsAPI
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: book_transfer
+  description: Book Transfer (Western Alliance Bank Book Transfer API)
+  source_operation: openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml#POST /info-book-transfer-eapi/api/v1/dp/transactions/transfer
+  operationId: bookTransfer
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: get_check_image
+  description: Get Check Image (Western Alliance Bank Check image API)
+  source_operation: openapi/western-alliance-bancorporation-check-image-api-openapi.yml#GET /info-check-image-eapi/api/v1/img/checks/{AccountNumber}
+  operationId: getCheckImage
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: get_date_range_transactions
+  description: Get Date Range Transactions (Western Alliance Bank Date Range Transactions API)
+  source_operation: openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml#GET /info-dt-rng-trns-eapi/api/v1/dp/accounts/{AccountNumber}/AccountTransactions
+  operationId: getDateRangeTransactions
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: initiate_intra_bank_transfer
+  description: Initiate an intra-bank transfer (Western Alliance Bank Intrabank Transfer API)
+  source_operation: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml#POST /trnsct-ibt-eapi/api/v1/transactions/intraBankTransfer
+  operationId: initiateIntraBankTransfer
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: search_intra_bank_transfers
+  description: Search intra-bank transfers (originator or beneficiary mode) (Western Alliance Bank Intrabank Transfer
+    API)
+  source_operation: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml#POST /trnsct-ibt-eapi/api/v2/transactions/intraBankSearch
+  operationId: searchIntraBankTransfers
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: single_account_balance_api_get_balance
+  description: Get balance (Western Alliance Bank Single Account Balance API)
+  source_operation: openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml#GET /info-single-acc-balance-eapi/api/v1dp/accounts/{AccountNumber}/balance
+  operationId: getBalance
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: single_account_intraday_api_get_intraday_transactions
+  description: Get Intraday transactions (Western Alliance Bank Single Account Intraday API)
+  source_operation: openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml#GET /info-single-acc-intraday-eapi/api/v1/dp/accounts/{AccountNumber}/transactions/intraday
+  operationId: getIntradayTransactions
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: single_account_priorday_api_get_priorday_transactions
+  description: Get Priorday transactions (Western Alliance Bank Single Account Priorday API)
+  source_operation: openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml#GET /info-single-acc-priorday-eapi/api/v1/dp/accounts/{AccountNumber}/transactions/priorDay
+  operationId: getPriordayTransactions
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: create_stop_payment_order
+  description: Create Stop Payment Order (Western Alliance Bank Stop Payments API)
+  source_operation: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml#POST /info-stop-payments-eapi/api/v1/dp/accounts/{AccountNumber}/stopPayments
+  operationId: createStopPaymentOrder
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: lookup_stop_payments_made_on_an_account
+  description: Lookup Stop Payments made on an account (Western Alliance Bank Stop Payments API)
+  source_operation: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml#GET /info-stop-payments-eapi/api/v1/dp/accounts/stopPayments
+  operationId: lookupStopPaymentsMadeOnAnAccount
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: entitltments_get_token
+  description: Entitltments Get token (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /entitlements-get-token-eapi/api/v1/token
+  operationId: entitltmentsGetToken
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: login_request
+  description: Login Request (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/login
+  operationId: loginRequest
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: login_status
+  description: Login Status (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /tassat-client-eapi/api/v1/login
+  operationId: loginStatus
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: user_token_wallets
+  description: User Token/Wallets (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /tassat-client-eapi{envKey}/api/v1/usertoken
+  operationId: userTokenWallets
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: balance_request
+  description: Balance Request (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/balance
+  operationId: balanceRequest
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: balance_balance_request
+  description: Balance Request (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /tassat-client-eapi/api/v1/balance
+  operationId: balanceBalanceRequest
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: deposite_request
+  description: Deposite Request (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/deposit/request
+  operationId: depositeRequest
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: deposite_status
+  description: Deposite Status (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/deposit/status
+  operationId: depositeStatus
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: redeem_request
+  description: Redeem Request (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/redeem/request
+  operationId: redeemRequest
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: redeem_status
+  description: Redeem Status (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/redeem/status
+  operationId: redeemStatus
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: send_request
+  description: Send Request (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/send/request
+  operationId: sendRequest
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true
+- name: send_redeem_status
+  description: Redeem Status (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/send/status
+  operationId: sendRedeemStatus
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: wallet_balance
+  description: Wallet balance (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /tassat-client-eapi/api/v1/walletbalance
+  operationId: walletBalance
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: transactions
+  description: Transactions (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#POST /tassat-client-eapi/api/v1/transactions
+  operationId: transactions
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: client_data
+  description: Client Data (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /tassat-client-eapi/api/v1/clientdata
+  operationId: clientData
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: wallet_names
+  description: Wallet Names (Western Alliance Bank TassatPay EAPI)
+  source_operation: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml#GET /tassat-client-eapi/api/v1/walletnames
+  operationId: walletNames
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: false
+- name: get_token
+  description: Get token (Western Alliance Bank Token API)
+  source_operation: openapi/western-alliance-bancorporation-token-api-openapi.yml#GET /entitlements-get-token-eapi/api/v1/token
+  operationId: getToken
+  auth: appClientId + appClientSecret headers
+  write: false
+- name: wires_request_api
+  description: Wires Request API (Western Alliance Bank Wires Request API)
+  source_operation: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml#PUT /trnsct-wires-rqst-eapi/api/v1/wires/transferRequest
+  operationId: wiresRequestAPI
+  auth: bearer token (appClientId/appClientSecret exchange)
+  write: true

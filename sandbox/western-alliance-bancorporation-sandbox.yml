@@ -1,0 +1,35 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  API Services Terms & Conditions 1(l) and 6(b) (https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf) and the ACH EAPI (Beta) / TassatPay EAPI (Beta) Postman
+  collections, whose host variable is https://api-connect.westernalliancebanktest.com (env = qa).
+description: >-
+  Western Alliance Bank runs a separate "Client UAT Environment" on api-connect.westernalliancebanktest.com. It is
+  provisioned through Treasury Management enrollment, not self-service; the Terms require every record in it to be
+  fake, masked, obfuscated or otherwise inactionable test data. No test card numbers, magic account numbers, test
+  clocks or fixture-trigger tooling are published, and no test values are invented here.
+docs:
+- https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+- https://developer.westernalliancebank.com/s/getting-started
+modes:
+- name: uat
+  base_url: https://api-connect.westernalliancebanktest.com
+  label: Client UAT Environment (collections call it env "qa")
+  notes: >-
+    Same product base paths as production. Updates are deployed here BEFORE production (Terms section 10), so it also
+    doubles as the preview surface for breaking changes. Separate credentials; the published beta collections carry
+    example AppClientId/AppClientSecret variables for this host (kept verbatim - they are the provider's published UAT examples, not live credentials).
+- name: production
+  base_url: https://api-connect.westernalliancebank.com
+  notes: Credentials and Client Certificate issued at enrollment; anonymous requests receive nginx 403.
+key_formats:
+  note: Client ID is "a unique alphanumeric identifier assigned by WAB"; Client Secret is "a secret key unique to Company"; no environment prefix is documented.
+test_values:
+  published: false
+  note: >-
+    The user guide's worked example uses accounts 1212121212 / 1313131313 and PaymentId 09232025124 purely as
+    illustration ("Example Value"); they are not documented as working UAT fixtures.
+tooling:
+  postman_collections: postman/ (15 collections; the two beta ones are pre-pointed at the UAT host)
+  test_clock: none
+  event_triggers: none

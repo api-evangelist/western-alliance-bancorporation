@@ -1,0 +1,87 @@
+# Western Alliance Bank
+
+> Western Alliance Bank one of the country's top-performing financial institutions, providing business banking, industry-specific expertise, and personalized commercial, small business, and personal banking solutions. Western Alliance Bank is the primary subsidiary of Western Alliance Bancorporation (NYSE: WAL).
+
+
+## Commercial Banking
+- [Commercial Banking](https://www.westernalliancebancorporation.com/commercial): Overview of commercial banking solutions for businesses.
+- [Loans and Credit](https://www.westernalliancebancorporation.com/commercial/loans-and-credit): Commercial lending and credit products.
+- [Asset-Based Lending](https://www.westernalliancebancorporation.com/commercial/asset-based-lending): Asset-based lending solutions for businesses.
+- [Equipment Finance](https://www.westernalliancebancorporation.com/commercial/equipment-finance): Financing for business equipment purchases.
+- [Lender Finance](https://www.westernalliancebancorporation.com/commercial/lender-finance): Financing solutions for specialty finance companies and lenders.
+- [Note Finance](https://www.westernalliancebancorporation.com/commercial/note-finance): Note finance and related lending products.
+- [Checking and Savings](https://www.westernalliancebancorporation.com/commercial/checking-and-savings): Business checking and savings accounts.
+- [Credit Cards](https://www.westernalliancebancorporation.com/commercial/credit-cards): Business credit card products.
+- [Treasury Management](https://www.westernalliancebancorporation.com/commercial/treasury-management): Treasury management and payment solutions for businesses.
+- [Global Markets Services](https://www.westernalliancebancorporation.com/commercial/global-markets-services): Foreign exchange and global markets services.
+
+## Small Business Banking
+- [Small Business Banking](https://www.westernalliancebancorporation.com/small-business): Banking products designed for small businesses.
+- [Checking and Savings](https://www.westernalliancebancorporation.com/small-business/checking-and-savings): Small business checking and savings accounts.
+- [Credit Cards](https://www.westernalliancebancorporation.com/small-business/credit-cards): Small business credit card products.
+- [Mobile and Online Banking](https://www.westernalliancebancorporation.com/small-business/mobile-and-online-banking): Digital banking tools for small business owners.
+- [Loans](https://www.westernalliancebancorporation.com/small-business/loans): Small business loan products.
+- [Fraud Protection](https://www.westernalliancebancorporation.com/small-business/fraud-protection): Fraud prevention resources for small businesses.
+- [Merchant Services](https://www.westernalliancebancorporation.com/small-business/merchant-services): Payment processing and merchant services.
+
+## Personal Banking
+- [Personal Banking](https://www.westernalliancebancorporation.com/personal): Personal banking services for professionals, business owners, and other eligible clients.
+- [Checking](https://www.westernalliancebancorporation.com/personal/checking): Personal checking account options.
+- [Savings](https://www.westernalliancebancorporation.com/personal/savings): Personal savings account options.
+- [High-Yield Savings Account](https://www.westernalliancebancorporation.com/personal-banking/high-yield-savings-account): High-yield savings account details.
+- [Money Market](https://www.westernalliancebancorporation.com/personal/savings/money-market): Money market account options.
+- [CDs](https://www.westernalliancebancorporation.com/personal/savings/cds): Certificate of deposit products.
+- [IRAs](https://www.westernalliancebancorporation.com/personal/savings/iras): Individual retirement account options.
+- [Home Equity](https://www.westernalliancebancorporation.com/personal/home-equity): Home equity financing options.
+- [Private Client](https://www.westernalliancebancorporation.com/personal/private-client): Private banking services for high-net-worth clients.
+- [Online Banking](https://www.westernalliancebancorporation.com/personal/online-banking): Personal online and mobile banking access.
+
+## Industry Expertise
+- [Industry Expertise](https://www.westernalliancebancorporation.com/expertise): Overview of banking solutions across more than 30 industries and sectors.
+- [Innovation Banking](https://www.westernalliancebancorporation.com/expertise/innovation-banking): Banking and financing for technology, life sciences, and other innovation-focused companies.
+- [Commercial Real Estate and Construction](https://www.westernalliancebancorporation.com/expertise/commercial-real-estate-and-construction): Commercial real estate financing and construction loans.
+- [Association Banking](https://www.westernalliancebancorporation.com/expertise/homeowners-associations): Banking, lending, payment, and technology solutions for community management companies and homeowners associations.
+- [Legal](https://www.westernalliancebancorporation.com/expertise/legal): Full-service banking and settlement services for law firms.
+- [Healthcare](https://www.westernalliancebancorporation.com/expertise/healthcare): Banking solutions for healthcare organizations.
+- [Blockchain and Digital Assets](https://www.westernalliancebancorporation.com/expertise/blockchain-and-digital-assets): Banking services for blockchain and digital asset companies.
+- [Government Banking](https://www.westernalliancebancorporation.com/expertise/government-banking): Banking solutions for government entities.
+- [Local Government and Municipal](https://www.westernalliancebancorporation.com/expertise/local-government-and-municipal): Banking services for local government and municipal clients.
+- [Nonprofits](https://www.westernalliancebancorporation.com/expertise/nonprofits): Banking solutions for nonprofit organizations.
+- [Manufacturing and Logistics](https://www.westernalliancebancorporation.com/expertise/manufacturing-and-logistics): Banking services for manufacturing and logistics companies.
+- [Hotels](https://www.westernalliancebancorporation.com/expertise/hotels): Banking solutions for the hospitality industry.
+- [Gaming](https://www.westernalliancebancorporation.com/expertise/gaming): Banking services for the gaming industry.
+- [Entertainment & Media](https://www.westernalliancebancorporation.com/expertise/entertainment-media): Banking solutions for entertainment and media companies.
+- [Food, Agriculture & Beverage](https://www.westernalliancebancorporation.com/expertise/food-agriculture-beverage): Banking services for the food, agriculture, and beverage sectors.
+- [Affordable Housing Investments](https://www.westernalliancebancorporation.com/expertise/affordable-housing-investments): Financing solutions for affordable housing projects.
+- [Aerospace & Government Contracting](https://www.westernalliancebancorporation.com/expertise/aerospace-government-contracting): Banking services for aerospace and government contractors.
+- [Professional Services](https://www.westernalliancebancorporation.com/expertise/professional-services): Banking solutions for professional services firms.
+- [Restaurants](https://www.westernalliancebancorporation.com/expertise/restaurants): Banking services for restaurant businesses.
+- [Sponsor Finance](https://www.westernalliancebancorporation.com/expertise/sponsor-finance): Financing solutions for private equity sponsors.
+- [Specialized Mortgage Services](https://www.westernalliancebancorporation.com/expertise/specialized-mortgage-services): Banking services for mortgage companies.
+- [Timeshare Resorts](https://www.westernalliancebancorporation.com/expertise/timeshare-resorts): Banking solutions for the timeshare resort industry.
+- [Business Escrow Services](https://www.westernalliancebancorporation.com/expertise/business-escrow-services): Escrow services for business transactions.
+
+## Insights
+- [Insights](https://www.westernalliancebancorporation.com/insights): Industry-specific articles and expert perspectives from Western Alliance banking professionals, covering economic forecasts, fraud prevention, and operational best practices across sectors such as commercial real estate, startup banking, healthcare, and HOA management.
+
+## Company Information
+- [About Us](https://www.westernalliancebancorporation.com/about-us): Information about Western Alliance Bank, its history, and organizational values.
+- [Our Leadership](https://www.westernalliancebancorporation.com/about-us/our-leadership): Profiles of Western Alliance Bank's executive leadership team.
+- [Client Stories](https://www.westernalliancebancorporation.com/about-us/client-stories): Case studies and testimonials from Western Alliance Bank clients.
+- [Careers](https://www.westernalliancebancorporation.com/about-us/careers): Career opportunities at Western Alliance Bank.
+- [Locations](https://www.westernalliancebancorporation.com/about-us/locations): Branch and office locations.
+- [News](https://www.westernalliancebancorporation.com/about-us/news): Company news and press releases.
+- [Community Commitment](https://www.westernalliancebancorporation.com/about-us/community-commitment): Community development, financial literacy, and corporate responsibility initiatives.
+
+## Investor Relations
+- [Investor Relations Overview](https://investors.westernalliancebancorporation.com/overview/default.aspx): Official financial results, SEC filings, and corporate information for Western Alliance Bancorporation.
+- [News and Presentations](https://investors.westernalliancebancorporation.com/News-and-Presentations/default.aspx): Corporate announcements, financial news, and investor presentations.
+- [Stock Info](https://investors.westernalliancebancorporation.com/stock-info/stock-quote/default.aspx): Stock quote and share performance information.
+- [Financials](https://investors.westernalliancebancorporation.com/financials/quarterly-results/default.aspx): Quarterly and annual financial results.
+- [Governance](https://investors.westernalliancebancorporation.com/governance/governance-documents/default.aspx): Corporate governance documents and board information.
+
+## Customer Resources
+- [Contact Us](https://www.westernalliancebancorporation.com/contact-us): Customer service contacts, fraud-reporting information, and support resources.
+- [Fraud Protection](https://www.westernalliancebancorporation.com/about-us/fraud-protection): Information on identifying and reporting fraud.
+- [Privacy & Legal](https://www.westernalliancebancorporation.com/privacy-legal-home): Privacy policy and legal disclosures.
+- [Sitemap](https://www.westernalliancebancorporation.com/sitemap): Directory of available Western Alliance Bank website content.

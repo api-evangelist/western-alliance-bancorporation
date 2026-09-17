@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "93ab7bf3-493d-4bbe-9ec6-27f462bc0a3e",
+		"name": "Wires Request API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"item": [
+				{
+					"name": "Get token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"BearerToken\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "appClientId",
+								"value": "{{ClientId}}",
+								"type": "text"
+							},
+							{
+								"key": "appClientSecret",
+								"value": "{{ClientSecret}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_TOKEN_SERVICE}}/token?Scope=Informational",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_TOKEN_SERVICE}}"
+							],
+							"path": [
+								"token"
+							],
+							"query": [
+								{
+									"key": "Scope",
+									"value": "Informational"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Healthcheck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "X-Dependent-Ping",
+								"value": "false",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_WIRES}}/healthcheck",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_WIRES}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Wires Request API",
+			"item": [
+				{
+					"name": "Wires Request API",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{BearerToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Source-System",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"SystemIdentifier\": \"BIN\",\r\n  \"WireConfirmationNumber\": \"BIN2975658797\",\r\n  \"MethodOfPayment\": \"FED\",\r\n  \"ProcessingDate\": \"20221016\",\r\n  \"Amount\": \"00000000000000505\",\r\n  \"Currency\": \"USD\",\r\n  \"VirtualAccountNumber\": \"1234567\",\r\n  \"VirtualAccountName\": \"VAN-ACCName\",\r\n  \"VirtualAccountAddress1\": \"123, ABC Lane\",\r\n  \"VirtualAccountAddress2\": \"AZ\",\r\n  \"VirtualAccountAddress3\": \"\",\r\n  \"OriginationAccountNumber\": \"8010334723\",\r\n  \"PaymentInformationCode\": \"CTR\",\r\n  \"Intermediary1BankName\": \"WESTERN ALLIANCE BANK\",\r\n  \"Intermediary1BankId\": \"222105980\",\r\n  \"BeneficiaryAccountNumber\": \"123456\",\r\n  \"OBI\": \"\",\r\n  \"ProcessingInstruction\": \"\",\r\n  \"OriginatorName\": \"Test Company\",\r\n  \"OriginatorBankRoutingNumber\": \"132402104\",\r\n  \"OriginatorAddress1\": \"\",\r\n  \"OriginatorAddress2\": \"Ste 1400\",\r\n  \"OriginatorAddress3\": \"Phoenix, AZ 85004\",\r\n  \"BeneficiaryBankIdType\": \"FW\",\r\n  \"BeneficiaryBankId\": \"222105980\",\r\n  \"BeneficiaryName\": \"Test Group\",\r\n  \"BeneficiaryAddress1\": \"1234 Anywhere St, Laveen\",\r\n  \"BeneficiaryAddress2\": \"AZ,85339\",\r\n  \"BeneficiaryAddress3\": \"AMM\",\r\n  \"BeneficiaryCountry\": \"US\",\r\n  \"BeneficiaryBankAddress1\": \"PHOENIX\",\r\n  \"BeneficiaryBankAddress2\": \"AZ\",\r\n  \"BeneficiaryBankAddress3\": \"\",\r\n  \"Intermediary2BankIdType\": \"\",\r\n  \"Intermediary2BankId\": \"\",\r\n  \"Intermediary2BankName\": \"\",\r\n  \"Intermediary2BankAddress1\": \"\",\r\n  \"Intermediary2BankAddress2\": \"\",\r\n  \"Intermediary2BankAddress3\": \"\",\r\n  \"Intermediary1BankIdType\": \"\",\r\n  \"Intermediary1BankAddress1\": \"\",\r\n  \"Intermediary1BankAddress2\": \"\",\r\n  \"Intermediary1BankAddress3\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{PUBLIC_HOST}}{{BASE_PATH_WIRES}}/wires/transferRequest",
+							"protocol": "https",
+							"host": [
+								"{{PUBLIC_HOST}}{{BASE_PATH_WIRES}}"
+							],
+							"path": [
+								"wires",
+								"transferRequest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BearerToken",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "PUBLIC_HOST",
+			"value": "api-connect.westernalliancebank.com",
+			"type": "default"
+		},
+		{
+			"key": "ClientId",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "ClientSecret",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "BASE_PATH_TOKEN_SERVICE",
+			"value": "/entitlements-get-token-eapi/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "BASE_PATH_WIRES",
+			"value": "/trnsct-wires-rqst-eapi/api/v1",
+			"type": "default"
+		},
+		{
+			"key": "AccountNumber",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

@@ -1,0 +1,77 @@
+generated: '2026-09-17'
+method: searched
+source: >-
+  Derived from openapi/*.yml (derived from the provider's Postman collections) and the Intrabank Transfer API User
+  Guide (https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4); searched the API Services Terms (https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf) and the corporate site for compliance claims. No trust
+  center, SOC 2 / ISO 27001 / PCI attestation or FDX / ISO 20022 conformance statement is published for the API,
+  so no Compliance pointer is emitted.
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    The API uses a proprietary credential exchange (appClientId / appClientSecret headers on GET /token?Scope=...),
+    not an OAuth 2.0 token endpoint; no grant types, no RFC 8414 metadata on the gateway.
+- id: oidc
+  conforms: false
+  evidence: >-
+    developer.westernalliancebank.com serves /.well-known/openid-configuration, but it is the Salesforce Experience
+    Cloud login IdP for the portal, not the API authorization server; the api-connect gateways serve no discovery.
+- id: mutual-tls
+  conforms: true
+  evidence: API Services Terms 1(i) and 6(c)(ii) require a WAB-issued Client Certificate on servers that initiate funds transfers.
+- id: rfc9457
+  conforms: false
+  evidence: Errors are returned as {errors:[{code,message,additionalInfo}]} (user guide error index), not application/problem+json.
+- id: idempotency
+  conforms: true
+  evidence: >-
+    Client-assigned PaymentId is a replay guard on POST /transactions/intraBankTransfer (409 Duplicate); partial
+    coverage - see conventions/ (one of five write operations).
+- id: pagination
+  conforms: true
+  evidence: X-Next-Page-Key request header on intraday / prior-day / date-range reads; page query parameter on intraBankSearch.
+- id: fdx
+  conforms: false
+  evidence: >-
+    The Informational APIs (balances, transactions, statements) use WAB-native paths (/dp/accounts/{AccountNumber}/balance)
+    and PascalCase fields, not the Financial Data Exchange resource model; no FDX claim anywhere.
+- id: iso20022
+  conforms: false
+  evidence: >-
+    No pain.001 / pain.002 / camt message support is published. The transfer webhook and search results reuse ISO
+    20022 STATUS and REASON CODE VOCABULARY (StatusCode ACSC / RJCT, FundTransferReasonCode MS01) - recorded under
+    domain_standards below as a code-set signature, not as message-level conformance.
+- id: nacha
+  conforms: true
+  evidence: >-
+    POST /trnsct-ach-eapi/api/v1/achRequest (beta) takes a NACHA-shaped BatchHeader (StandardEntryClassCode PPD,
+    CompanyIdentification, OriginatingDFIIdentification, EffectiveEntryDate) and EntryDetails, i.e. the ACH file
+    record vocabulary as JSON.
+- id: fedwire
+  conforms: true
+  evidence: PUT /trnsct-wires-rqst-eapi/api/v1/wires/transferRequest carries MethodOfPayment "FED" and Fedwire-style originator/beneficiary fields.
+domain_standards:
+  sector: banking
+  signatures:
+  - standard: iso20022-payment-status-codes
+    kind: code-set
+    conforms: true
+    evidence: >-
+      openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
+      components.schemas.IntraBankTransaction.FundTransferReasonCode (MS01) and
+      asyncapi/western-alliance-bancorporation-webhooks.yml events[].status_code (ACSC, RJCT) - ISO 20022
+      ExternalPaymentTransactionStatus1Code / ExternalStatusReason1Code values.
+  - standard: nacha-ach-batch-format
+    kind: message-shape
+    conforms: true
+    evidence: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml paths./trnsct-ach-eapi/api/v1/achRequest.post.requestBody (BatchHeader.StandardEntryClassCode, OriginatingDFIIdentification).
+  - standard: fdx
+    conforms: false
+    evidence: none of the Informational API paths or fields follow FDX resource naming.
+compliance_claims:
+  published: false
+  note: >-
+    Western Alliance Bank is FDIC-insured and, as a bank holding company, is examined under federal banking
+    regulation; but no API-specific security attestation (SOC 2, ISO 27001, PCI DSS) or trust center is published,
+    and the Terms only require the CLIENT to maintain "commercially reasonable" security and report intrusions to
+    noc@westernalliancebank.com.

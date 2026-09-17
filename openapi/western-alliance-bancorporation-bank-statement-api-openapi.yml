@@ -1,0 +1,161 @@
+openapi: 3.1.0
+info:
+  title: Western Alliance Bank Bank Statement API
+  version: v1
+  description: 'Retrieves a bank statement document for an account and statement period.
+
+
+    Derived mechanically from the ''Bank Statement API'' Postman collection published on the WAB API Developer Portal (family:
+    Informational APIs). Every path, header, query parameter and request body comes from that collection; response bodies
+    are not captured because the collection ships none.'
+  contact:
+    name: Western Alliance Bank API Developer Portal
+    url: https://developer.westernalliancebank.com/s/
+  termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  x-family: Informational
+  x-generated-from: postman
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  x-source-page: https://developer.westernalliancebank.com/s/postman-collection
+  x-provenance:
+    generated: '2026-09-17'
+    method: derived
+    source: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+    note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
+servers:
+- url: https://api-connect.westernalliancebank.com
+  description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+tags:
+- name: Get Token
+- name: Health Check
+- name: Get Bank Statement API
+paths:
+  /entitlements-get-token-eapi/api/v1/token:
+    get:
+      operationId: getToken
+      summary: Get token
+      tags:
+      - Get Token
+      parameters:
+      - name: Scope
+        in: query
+        required: true
+        schema:
+          type: string
+        example: Informational
+      - name: appClientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (appClientId); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: appClientSecret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (appClientSecret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /info-bank-statements-eapi/api/v1/healthcheck:
+    get:
+      operationId: healthcheck
+      summary: Healthcheck
+      tags:
+      - Health Check
+      parameters:
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      - name: X-Dependent-Ping
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 'false'
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /info-bank-statements-eapi/api/v1/img/documents/statement:
+    get:
+      operationId: bankStatementsAPI
+      summary: Bank Statements API
+      tags:
+      - Get Bank Statement API
+      parameters:
+      - name: AccountNumber
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: Period
+        in: query
+        required: true
+        schema:
+          type: string
+        description: YYYYMM
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the
+        appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+    appClientId:
+      type: apiKey
+      in: header
+      name: appClientId
+      description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+    appClientSecret:
+      type: apiKey
+      in: header
+      name: appClientSecret
+      description: Client Secret known only to the client and the WAB API gateway.

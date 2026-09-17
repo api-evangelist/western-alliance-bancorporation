@@ -1,0 +1,20 @@
+generated: '2026-09-17'
+method: searched
+source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+description: >-
+  In-band status codes on Western Alliance Bank's intrabank transfer surface: the W-codes returned with HTTP 200 on
+  POST /transactions/intraBankTransfer, and the ISO 20022-style status and reason codes carried by the transfer
+  webhook and the Search API. Distinct from the HTTP errors[] envelope in
+  errors/western-alliance-bancorporation-problem-types.yml. Only codes that appear in the provider's user guide are
+  listed; the full code table is not published anonymously.
+docs: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+envelope_field: StatusCode (transfer response and webhook); FundTransferReasonCode + FundTransferReasonDescription (webhook and search results)
+decline_codes:
+- {code: W02, meaning: Intrabank transfer is accepted - format validation passed; funds not yet posted, action: Persist PaymentMessageReference and wait for the webhook (or poll Search / Intraday).}
+- {code: W21, meaning: Intrabank transfer is rejected due to invalid debit account, action: Correct OriginatorAccountId; the response is HTTP 200 with Status Rejected and an empty PaymentMessageReference.}
+- {code: ACSC, meaning: Webhook StatusMessage Confirmed - transfer executed (ISO 20022 AcceptedSettlementCompleted), action: Reconcile against Intraday today and Prior Day next business day.}
+- {code: RJCT, meaning: Webhook StatusMessage Rejected - transfer not executed (ISO 20022 Rejected), action: Read FundTransferReasonCode; resubmit with a new PaymentId if appropriate.}
+- {code: MS01, meaning: Reason code "Unable to process" / "Payment cancelled as unable to process" (ISO 20022 MS01 NotSpecifiedReasonAgentGenerated), action: Contact the bank; no client-side retry guidance is published.}
+transfer_types:
+- {code: FTRINF, meaning: TransferType on a confirmed webhook}
+- {code: FTRCAN, meaning: TransferType on a rejected/cancelled webhook}

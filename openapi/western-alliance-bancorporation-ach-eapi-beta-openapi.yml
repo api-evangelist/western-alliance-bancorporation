@@ -1,0 +1,227 @@
+openapi: 3.1.0
+info:
+  title: Western Alliance Bank ACH EAPI
+  version: v1
+  description: 'Beta. Originates an ACH batch (NACHA batch header + entry details) for credit or debit.
+
+
+    Derived mechanically from the ''ACH EAPI | Beta'' Postman collection published on the WAB API Developer Portal (family:
+    Transactional APIs). Every path, header, query parameter and request body comes from that collection; response bodies
+    are not captured because the collection ships none.'
+  contact:
+    name: Western Alliance Bank API Developer Portal
+    url: https://developer.westernalliancebank.com/s/
+  termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  x-family: Transactional
+  x-generated-from: postman
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  x-source-page: https://developer.westernalliancebank.com/s/postman-collection
+  x-provenance:
+    generated: '2026-09-17'
+    method: derived
+    source: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+    note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
+  x-status: beta
+servers:
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms) — the collection
+    as published targets this host (env=qa)
+- url: https://api-connect.westernalliancebank.com
+  description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+tags:
+- name: Get Token
+- name: Healthcheck
+- name: ACH Request
+paths:
+  /entitlements-get-token-eapi/api/v1/token:
+    get:
+      operationId: getToken
+      summary: Get Token
+      tags:
+      - Get Token
+      parameters:
+      - name: Scope
+        in: query
+        required: true
+        schema:
+          type: string
+        example: Informational
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      - name: AppClientId
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (AppClientId); value issued by Western Alliance Bank at enrollment. Never publish real
+          values.
+      - name: AppClientSecret
+        in: header
+        required: true
+        schema:
+          type: string
+        description: Credential header (AppClientSecret); value issued by Western Alliance Bank at enrollment. Never publish
+          real values.
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /trnsct-ach-eapi/api/v1/healthcheck:
+    get:
+      operationId: healthcheck
+      summary: Healthcheck
+      tags:
+      - Healthcheck
+      parameters:
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Dependent-Ping
+        in: header
+        required: false
+        schema:
+          type: string
+        example: 'true'
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+  /trnsct-ach-eapi/api/v1/achRequest:
+    post:
+      operationId: achRequestUAT
+      summary: ACH Request UAT
+      tags:
+      - ACH Request
+      parameters:
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                BatchHeader:
+                  type: object
+                  properties:
+                    StandardEntryClassCode:
+                      type: string
+                    DebitORCredit:
+                      type: string
+                    CompanyEntryDescription:
+                      type: string
+                    EffectiveEntryDate:
+                      type: string
+                    CompanyDescriptiveDate:
+                      type: string
+                    CompanyName:
+                      type: string
+                    CompanyIdentification:
+                      type: string
+                    OriginatingDFIIdentification:
+                      type: string
+                EntryDetail:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      ReceiverName:
+                        type: string
+                      EntryConfirmationNumber:
+                        type: string
+                      ReceivingAccountType:
+                        type: string
+                      ReceivingAccountNumber:
+                        type: string
+                      ReceiverRoutingNumber:
+                        type: string
+                      ReceiverIdentificationNumber:
+                        type: string
+                      Amount:
+                        type: string
+                      VirtualAccountName:
+                        type: string
+                      VirtualAccountNumber:
+                        type: string
+                      TraceNumber:
+                        type: string
+                      AddendaDetails:
+                        type: string
+                      PaymentTypeCode:
+                        type: string
+            example:
+              BatchHeader:
+                StandardEntryClassCode: PPD
+                DebitORCredit: Credit
+                CompanyEntryDescription: Payroll
+                EffectiveEntryDate: '2023-06-02'
+                CompanyDescriptiveDate: '2023-01-11'
+                CompanyName: DDRpvtltd
+                CompanyIdentification: '6340360466'
+                OriginatingDFIIdentification: '12210598'
+              EntryDetail:
+              - ReceiverName: R
+                EntryConfirmationNumber: '130656789012'
+                ReceivingAccountType: '27'
+                ReceivingAccountNumber: '9832523532'
+                ReceiverRoutingNumber: '133756121'
+                ReceiverIdentificationNumber: '111122223333121'
+                Amount: '496600'
+                VirtualAccountName: ''
+                VirtualAccountNumber: ''
+                TraceNumber: '123456989090100'
+                AddendaDetails: TRN*1*12345*1512345678*999999999
+                PaymentTypeCode: S
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+      x-beta: true
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the
+        appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+    appClientId:
+      type: apiKey
+      in: header
+      name: appClientId
+      description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+    appClientSecret:
+      type: apiKey
+      in: header
+      name: appClientSecret
+      description: Client Secret known only to the client and the WAB API gateway.
