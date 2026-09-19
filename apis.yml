@@ -33,14 +33,14 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-al
 tags:
 - Banking
 - Financial-Services
-- Treasury-Management
+- Treasury Management
 - Payments
-- Accounts
-- Transactions
+- Account
+- Transaction
 - Wires
 - ACH
-- Digital-Assets
-- Webhooks
+- Digital Assets
+- Webhook
 tags_raw:
 - Banking
 - Financial Services
@@ -62,7 +62,7 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Authentication
   - Tokens
   tags_raw:
@@ -96,8 +96,8 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
+  - Treasury Management
+  - Account
   - Balances
   tags_raw:
   - Banking
@@ -130,8 +130,8 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
+  - Treasury Management
+  - Account
   - Balances
   tags_raw:
   - Banking
@@ -164,9 +164,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
-  - Transactions
+  - Treasury Management
+  - Account
+  - Transaction
   tags_raw:
   - Banking
   - Financial Services
@@ -198,9 +198,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
-  - Transactions
+  - Treasury Management
+  - Account
+  - Transaction
   tags_raw:
   - Banking
   - Financial Services
@@ -232,9 +232,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
-  - Transactions
+  - Treasury Management
+  - Account
+  - Transaction
   tags_raw:
   - Banking
   - Financial Services
@@ -266,9 +266,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
-  - Transactions
+  - Treasury Management
+  - Account
+  - Transaction
   tags_raw:
   - Banking
   - Financial Services
@@ -300,9 +300,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Accounts
-  - Transactions
+  - Treasury Management
+  - Account
+  - Transaction
   tags_raw:
   - Banking
   - Financial Services
@@ -334,7 +334,7 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Statements
   - Documents
   tags_raw:
@@ -368,9 +368,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Checks
-  - Images
+  - Image
   tags_raw:
   - Banking
   - Financial Services
@@ -402,9 +402,9 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Checks
-  - Stop-Payments
+  - Stop Payments
   tags_raw:
   - Banking
   - Financial Services
@@ -436,7 +436,7 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Payments
   - Transfers
   tags_raw:
@@ -470,7 +470,7 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Payments
   - Wires
   tags_raw:
@@ -504,10 +504,10 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Payments
   - Transfers
-  - Webhooks
+  - Webhook
   tags_raw:
   - Banking
   - Financial Services
@@ -546,7 +546,7 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
+  - Treasury Management
   - Payments
   - ACH
   tags_raw:
@@ -581,8 +581,8 @@ apis:
   tags:
   - Banking
   - Financial-Services
-  - Treasury-Management
-  - Digital-Assets
+  - Treasury Management
+  - Digital Assets
   - Blockchain
   - Payments
   tags_raw:
