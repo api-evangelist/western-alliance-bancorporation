@@ -32,7 +32,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
 tags:
 - Banking
-- Financial-Services
+- Financial Services
 - Treasury Management
 - Payments
 - Account
@@ -52,322 +52,17 @@ tags_raw:
 - ACH
 - Digital Assets
 - Webhooks
+- Financial-Services
 description: 'Western Alliance Bancorporation (NYSE: WAL) is the parent of Western Alliance Bank, a top-performing US commercial bank. Its WAB API Developer Portal (developer.westernalliancebank.com, built on Salesforce Experience Cloud with MuleSoft Anypoint API Community Manager) publishes treasury-management APIs on the api-connect.westernalliancebank.com gateway in six families - Informational (balances, intraday, prior-day and date-range transactions, statements, check images, stop payments), Transactional (book transfer, wires, intrabank transfer, ACH beta), Utility (token), Embedded Finance, Digital Assets (TassatPay beta) and Corporate Trust. Access requires Treasury Management enrollment; the bank issues a Client ID / Client Secret exchanged for a time-limited bearer token, and the intrabank transfer surface pushes ISO 20022-coded status webhooks.'
 created: '2026-04-19'
 modified: '2026-09-17'
 specificationVersion: '0.23'
 apis:
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-token-api
-  name: Western Alliance Bank Token API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Authentication
-  - Tokens
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Authentication
-  - Tokens
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-token-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
-    name: Token API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/utility-apis
-  description: 'Entitlements token service: exchanges the client id + client secret issued at enrollment for a scoped bearer token used by every other WAB API. Family: Utility APIs on the WAB API Developer Portal; 2 operations captured.'
-  x-family: Utility
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-all-account-balance-api
-  name: Western Alliance Bank All Account Balance API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Balances
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Balances
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
-    name: All Account Balance API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Returns current balances for every account entitled to the calling client. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-single-account-balance-api
-  name: Western Alliance Bank Single Account Balance API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Balances
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Balances
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-single-account-balance-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
-    name: Single Account Balance API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Returns the current balance for one account. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-all-account-intraday-api
-  name: Western Alliance Bank All Account Intraday API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Transaction
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Transactions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-all-account-intraday-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
-    name: All Account Intraday API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Same-day (intraday) transaction history across all entitled accounts, with optional filters and page-key pagination. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-single-account-intraday-api
-  name: Western Alliance Bank Single Account Intraday API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Transaction
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Transactions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-single-account-intraday-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
-    name: Single Account Intraday API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Same-day (intraday) transaction history for one account. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-all-account-priorday-api
-  name: Western Alliance Bank All Account Priorday API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Transaction
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Transactions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-all-account-priorday-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
-    name: All Account Priorday API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Prior-business-day posted transaction history across all entitled accounts. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-single-account-priorday-api
-  name: Western Alliance Bank Single Account Priorday API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Transaction
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Transactions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-single-account-priorday-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
-    name: Single Account Priorday API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Prior-business-day posted transaction history for one account. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-date-range-transactions-api
-  name: Western Alliance Bank Date Range Transactions API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Account
-  - Transaction
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Accounts
-  - Transactions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-date-range-transactions-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
-    name: Date Range Transactions API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Posted transactions for one account over a BeginDate/EndDate window, with filters and page-key pagination. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-bank-statement-api
-  name: Western Alliance Bank Bank Statement API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Statements
-  - Documents
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Statements
-  - Documents
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-bank-statement-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
-    name: Bank Statement API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Retrieves a bank statement document for an account and statement period. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Informational
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
 - aid: western-alliance-bancorporation:western-alliance-bancorporation-check-image-api
   name: Western Alliance Bank Check Image API
   tags:
   - Banking
-  - Financial-Services
+  - Financial Services
   - Treasury Management
   - Checks
   - Image
@@ -377,31 +72,40 @@ apis:
   - Treasury Management
   - Checks
   - Images
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
+  - Financial-Services
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
   baseURL: https://api-connect.westernalliancebank.com
   humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
   properties:
   - type: OpenAPI
     url: openapi/western-alliance-bancorporation-check-image-api-openapi.yml
   - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHEOWJRLBUVGAZJ6PKRUB7QZUUA
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHEOWJRLBUVGAZJ6PKRUB7QZUUA
     name: Check Image API Postman collection (served by the WAB API Developer Portal CMS)
   - type: PostmanCollection
     url: postman/western-alliance-bancorporation-check-image-api.postman_collection.json
   - type: Documentation
     url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Retrieves the image of a paid check by account, check date, check number, trace number and amount. Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.'
+  description: >-
+    Retrieves the image of a paid check by account, check date, check number, trace number and amount.
+    Family: Informational APIs on the WAB API Developer Portal; 3 operations captured.
   x-family: Informational
   x-evidence:
     verified: '2026-09-17'
     method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
+    docs: >-
+      Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer
+      portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
+    endpoint_check: >-
+      GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused);
+      enrollment-issued credentials required to call.
 - aid: western-alliance-bancorporation:western-alliance-bancorporation-stop-payments-api
   name: Western Alliance Bank Stop Payments API
   tags:
   - Banking
-  - Financial-Services
+  - Financial Services
   - Treasury Management
   - Checks
   - Stop Payments
@@ -411,31 +115,40 @@ apis:
   - Treasury Management
   - Checks
   - Stop Payments
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
+  - Financial-Services
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
   baseURL: https://api-connect.westernalliancebank.com
   humanURL: https://developer.westernalliancebank.com/s/apis/informational-apis
   properties:
   - type: OpenAPI
     url: openapi/western-alliance-bancorporation-stop-payments-api-openapi.yml
   - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTNG5FV64WBCTTMAE3ERIDE7XYU
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTNG5FV64WBCTTMAE3ERIDE7XYU
     name: Stop Payments API Postman collection (served by the WAB API Developer Portal CMS)
   - type: PostmanCollection
     url: postman/western-alliance-bancorporation-stop-payments-api.postman_collection.json
   - type: Documentation
     url: https://developer.westernalliancebank.com/s/apis/informational-apis
-  description: 'Places a stop-payment order on a check (or range) and looks up existing stop payments on an account. Family: Informational APIs on the WAB API Developer Portal; 4 operations captured.'
+  description: >-
+    Places a stop-payment order on a check (or range) and looks up existing stop payments on an account.
+    Family: Informational APIs on the WAB API Developer Portal; 4 operations captured.
   x-family: Informational
   x-evidence:
     verified: '2026-09-17'
     method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
+    docs: >-
+      Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer
+      portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
+    endpoint_check: >-
+      GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused);
+      enrollment-issued credentials required to call.
 - aid: western-alliance-bancorporation:western-alliance-bancorporation-book-transfer-api
   name: Western Alliance Bank Book Transfer API
   tags:
   - Banking
-  - Financial-Services
+  - Financial Services
   - Treasury Management
   - Payments
   - Transfers
@@ -445,65 +158,40 @@ apis:
   - Treasury Management
   - Payments
   - Transfers
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
+  - Financial-Services
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
   baseURL: https://api-connect.westernalliancebank.com
   humanURL: https://developer.westernalliancebank.com/s/apis/transactional-apis
   properties:
   - type: OpenAPI
     url: openapi/western-alliance-bancorporation-book-transfer-api-openapi.yml
   - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC7LBVXMMYIJAXBABHXRZSLULAPM
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC7LBVXMMYIJAXBABHXRZSLULAPM
     name: Book Transfer API Postman collection (served by the WAB API Developer Portal CMS)
   - type: PostmanCollection
     url: postman/western-alliance-bancorporation-book-transfer-api.postman_collection.json
   - type: Documentation
     url: https://developer.westernalliancebank.com/s/apis/transactional-apis
-  description: 'Moves funds between two Western Alliance accounts held by the same client (book transfer). Family: Transactional APIs on the WAB API Developer Portal; 2 operations captured.'
+  description: >-
+    Moves funds between two Western Alliance accounts held by the same client (book transfer). Family:
+    Transactional APIs on the WAB API Developer Portal; 2 operations captured.
   x-family: Transactional
   x-evidence:
     verified: '2026-09-17'
     method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-wires-request-api
-  name: Western Alliance Bank Wires Request API
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Payments
-  - Wires
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Payments
-  - Wires
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebank.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/transactional-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
-    name: Wires Request API Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
-  description: 'Submits a wire transfer request (Fedwire or other method of payment) from a virtual account. Family: Transactional APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Transactional
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
+    docs: >-
+      Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer
+      portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
+    endpoint_check: >-
+      GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused);
+      enrollment-issued credentials required to call.
 - aid: western-alliance-bancorporation:western-alliance-bancorporation-intrabank-transfer-api
   name: Western Alliance Bank Intrabank Transfer API
   tags:
   - Banking
-  - Financial-Services
+  - Financial Services
   - Treasury Management
   - Payments
   - Transfers
@@ -515,107 +203,48 @@ apis:
   - Payments
   - Transfers
   - Webhooks
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
+  - Financial-Services
+  image: >-
+    https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
   baseURL: https://api-connect.westernalliancebank.com
   humanURL: https://developer.westernalliancebank.com/s/apis/transactional-apis
   properties:
   - type: OpenAPI
     url: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
   - type: Documentation
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4
     name: Intrabank Transfer API User Guide (PDF)
   - type: Webhooks
     url: asyncapi/western-alliance-bancorporation-webhooks.yml
   - type: Documentation
     url: https://developer.westernalliancebank.com/s/apis/transactional-apis
-  description: 'Initiates an intra-bank transfer between two Western Alliance Bank accounts and searches
+  description: >-
+    Initiates an intra-bank transfer between two Western Alliance Bank accounts and searches
 
     intra-bank transfers as originator or beneficiary. The transfer returns a Payment Message
 
     Reference that is the universal identifier for the payment across the Intrabank Search,
 
-    Intraday, Prior Day and Date Range APIs and the webhook. Family: Transactional APIs on the WAB API Developer Portal; 2 operations captured.'
+    Intraday, Prior Day and Date Range APIs and the webhook. Family: Transactional APIs on the WAB API
+    Developer Portal; 2 operations captured.
   x-family: Transactional
   x-evidence:
     verified: '2026-09-17'
     method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused); enrollment-issued credentials required to call.
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-ach-eapi-beta
-  name: Western Alliance Bank ACH API (Beta)
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Payments
-  - ACH
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Payments
-  - ACH
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebanktest.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/transactional-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-ach-eapi-beta-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
-    name: ACH API (Beta) Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
-  description: 'Beta. Originates an ACH batch (NACHA batch header + entry details) for credit or debit. Family: Transactional APIs on the WAB API Developer Portal; 3 operations captured.'
-  x-family: Transactional
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: The published beta collection targets only the Client UAT host (env=qa); no production host is documented for this beta, so baseURL records the UAT gateway. GET https://api-connect.westernalliancebanktest.com/ -> 403 (live, anonymous access refused).
-  x-status: beta
-- aid: western-alliance-bancorporation:western-alliance-bancorporation-tassatpay-eapi-beta
-  name: Western Alliance Bank TassatPay API (Beta)
-  tags:
-  - Banking
-  - Financial-Services
-  - Treasury Management
-  - Digital Assets
-  - Blockchain
-  - Payments
-  tags_raw:
-  - Banking
-  - Financial Services
-  - Treasury Management
-  - Digital Assets
-  - Blockchain
-  - Payments
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/western-alliance-bancorporation.png
-  baseURL: https://api-connect.westernalliancebanktest.com
-  humanURL: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
-  properties:
-  - type: OpenAPI
-    url: openapi/western-alliance-bancorporation-tassatpay-eapi-beta-openapi.yml
-  - type: Postman
-    url: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
-    name: TassatPay API (Beta) Postman collection (served by the WAB API Developer Portal CMS)
-  - type: PostmanCollection
-    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
-  - type: Documentation
-    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
-  description: 'Beta. Client gateway to the TassatPay blockchain-based real-time B2B payments network: wallet balances, deposits (wallet to DDA), redemptions, sends between wallets, transactions and wallet names. Family: Digital Assets APIs on the WAB API Developer Portal; 16 operations captured.'
-  x-family: Digital Assets
-  x-evidence:
-    verified: '2026-09-17'
-    method: probed
-    docs: Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
-    endpoint_check: The published beta collection targets only the Client UAT host (env=qa); no production host is documented for this beta, so baseURL records the UAT gateway. GET https://api-connect.westernalliancebanktest.com/ -> 403 (live, anonymous access refused).
-  x-status: beta
+    docs: >-
+      Provider-published Postman collection (or PDF user guide for Intrabank) fetched 200 from the developer
+      portal CMS; names the api-connect.westernalliancebank.com host, paths, headers and request bodies.
+    endpoint_check: >-
+      GET https://api-connect.westernalliancebank.com/ -> 403 (gateway live, anonymous access refused);
+      enrollment-issued credentials required to call.
 - aid: western-alliance:wab-treasury-management-api
   name: Western Alliance Bank API (Treasury Management)
-  description: Western Alliance Bank's commercial open-banking API lets approved business clients interact directly with WAB systems to access balance and transaction information, retrieve check images, initiate funds transfers, and place stop payments. Documented publicly as an open-banking capability; API specifications and endpoints are gated behind the WAB Developer Hub and issued credentials.
+  description: >-
+    Western Alliance Bank's commercial open-banking API lets approved business clients interact directly
+    with WAB systems to access balance and transaction information, retrieve check images, initiate funds
+    transfers, and place stop payments. Documented publicly as an open-banking capability; API specifications
+    and endpoints are gated behind the WAB Developer Hub and issued credentials.
   humanURL: https://developer.westernalliancebank.com/s/
   tags:
   - Treasury Management
@@ -627,7 +256,1758 @@ apis:
   - type: Documentation
     url: https://www.westernalliancebancorporation.com/commercial/treasury-management
   - type: TermsOfService
-    url: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+    url: >-
+      https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-ach-request-api
+  name: Western Alliance Bancorporation ACH Request API
+  description: >-
+    The ACH Request API from Western Alliance Bancorporation — 1 operation(s) for ach request.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - ACH Request
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-ach-request-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-balance-api
+  name: Western Alliance Bancorporation Balance API
+  description: The Balance API from Western Alliance Bancorporation — 1 operation(s) for balance.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-balance-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-client-data-api
+  name: Western Alliance Bancorporation Client Data API
+  description: >-
+    The Client Data API from Western Alliance Bancorporation — 1 operation(s) for client data.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Client Data
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-client-data-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: >-
+    western-alliance-bancorporation:western-alliance-bancorporation-date-range-transaction-history-api
+  name: Western Alliance Bancorporation Date Range Transaction History API
+  description: >-
+    The Date Range Transaction History API from Western Alliance Bancorporation — 1 operation(s) for date
+    range transaction history.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Date Range Transaction History
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-date-range-transaction-history-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-deposite-api
+  name: Western Alliance Bancorporation Deposite API
+  description: The Deposite API from Western Alliance Bancorporation — 2 operation(s) for deposite.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Deposite
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-deposite-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-get-balance-api
+  name: Western Alliance Bancorporation Get Balance API
+  description: >-
+    The Get Balance API from Western Alliance Bancorporation — 2 operation(s) for get balance.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Get Balance
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-get-balance-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: >-
+    western-alliance-bancorporation:western-alliance-bancorporation-get-bank-statement-api-api
+  name: Western Alliance Bancorporation Get Bank Statement API
+  description: >-
+    The Get Bank Statement API API from Western Alliance Bancorporation — 1 operation(s) for get bank
+    statement api.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Get Bank Statement API
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-get-bank-statement-api-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: >-
+    western-alliance-bancorporation:western-alliance-bancorporation-get-tassat-login-token-api
+  name: Western Alliance Bancorporation Get Tassat Login Token API
+  description: >-
+    The Get Tassat Login Token API from Western Alliance Bancorporation — 1 operation(s) for get tassat
+    login token.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Get Tassat Login Token
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-get-tassat-login-token-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-get-token-api
+  name: Western Alliance Bancorporation Get Token API
+  description: The Get Token API from Western Alliance Bancorporation — 1 operation(s) for get token.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Get Token
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-get-token-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-get-user-token-api
+  name: Western Alliance Bancorporation Get User Token API
+  description: >-
+    The Get User Token API from Western Alliance Bancorporation — 1 operation(s) for get user token.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Get User Token
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-get-user-token-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-get-wab-token-api
+  name: Western Alliance Bancorporation Get WAB Token API
+  description: >-
+    The Get WAB Token API from Western Alliance Bancorporation — 1 operation(s) for get wab token.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Get WAB Token
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-get-wab-token-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-health-check-api
+  name: Western Alliance Bancorporation Health Check API
+  description: >-
+    The Health Check API from Western Alliance Bancorporation — 12 operation(s) for health check.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Health Check
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-health-check-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-intrabank-search-api
+  name: Western Alliance Bancorporation Intrabank Search API
+  description: >-
+    On-demand lookup of intra-bank transfers; a fallback when the webhook is missed, not a replacement
+    for it.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Intrabank Search
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-intrabank-search-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-redeem-api
+  name: Western Alliance Bancorporation Redeem API
+  description: The Redeem API from Western Alliance Bancorporation — 2 operation(s) for redeem.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Redeem
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-redeem-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-send-api
+  name: Western Alliance Bancorporation Send API
+  description: The Send API from Western Alliance Bancorporation — 2 operation(s) for send.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Send
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-send-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: >-
+    western-alliance-bancorporation:western-alliance-bancorporation-transaction-history-intraday-api
+  name: Western Alliance Bancorporation Transaction History Intraday API
+  description: >-
+    The Transaction History Intraday API from Western Alliance Bancorporation — 2 operation(s) for transaction
+    history intraday.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Transaction History Intraday
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-transaction-history-intraday-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: >-
+    western-alliance-bancorporation:western-alliance-bancorporation-transaction-history-priorday-api
+  name: Western Alliance Bancorporation Transaction History Priorday API
+  description: >-
+    The Transaction History Priorday API from Western Alliance Bancorporation — 2 operation(s) for transaction
+    history priorday.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Transaction History Priorday
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-transaction-history-priorday-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-transactions-api
+  name: Western Alliance Bancorporation Transactions API
+  description: >-
+    The Transactions API from Western Alliance Bancorporation — 1 operation(s) for transactions.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-transactions-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-wallet-balance-api
+  name: Western Alliance Bancorporation Wallet balance API
+  description: >-
+    The Wallet balance API from Western Alliance Bancorporation — 1 operation(s) for wallet balance.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Wallet balance
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-wallet-balance-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-wallet-names-api
+  name: Western Alliance Bancorporation Wallet Names API
+  description: >-
+    The Wallet Names API from Western Alliance Bancorporation — 1 operation(s) for wallet names.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Wallet Names
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-wallet-names-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
+- aid: western-alliance-bancorporation:western-alliance-bancorporation-wires-request-api-api
+  name: Western Alliance Bancorporation Wires Request API
+  description: >-
+    The Wires Request API API from Western Alliance Bancorporation — 1 operation(s) for wires request
+    api.
+  humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
+  baseURL: https://api-connect.westernalliancebank.com
+  tags:
+  - Wires Request API
+  properties:
+  - type: OpenAPI
+    url: openapi/western-alliance-bancorporation-wires-request-api-api-openapi.yml
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCPZ4TMDU3SZEDPHAR5JH5YAK6EY
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-token-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/utility-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/informational-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  - type: PostmanCollection
+    url: >-
+      postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-wires-request-api.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/transactional-apis
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCUYE2OVQ3XBG7HPWJCS2LVIA7UE
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-ach-eapi-beta.postman_collection.json
+  - type: Postman
+    url: >-
+      https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
+  - type: PostmanCollection
+    url: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
+  - type: Documentation
+    url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
 common:
 - type: Customers
   url: https://www.westernalliancebank.com

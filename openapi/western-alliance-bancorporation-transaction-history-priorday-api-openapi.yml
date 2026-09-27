@@ -1,0 +1,194 @@
+openapi: 3.2.0
+info:
+  title: Western Alliance Bancorporation Transaction History…
+  version: v1
+  contact:
+    name: Western Alliance Bank API Developer Portal
+    url: https://developer.westernalliancebank.com/s/
+  termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
+  x-family: Informational
+  x-generated-from: postman
+  x-refined-note:
+  - x-provenance differs across the merged source definitions and was not carried
+  - x-source differs across the merged source definitions and was not carried
+  x-source-page: https://developer.westernalliancebank.com/s/postman-collection
+  description: 'Operations tagged Transaction History Priorday across 2 of this provider''s published API definitions: western-alliance-bancorporation-all-account-priorday-api-openapi.yml, western-alliance-bancorporation-single-account-priorday-api-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api-connect.westernalliancebank.com
+  description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+tags:
+- name: Transaction History Priorday
+paths:
+  /info-multi-acc-priorday-eapi/api/v1/dp/accounts/transactions/priorDay:
+    get:
+      operationId: getPriordayTransactions
+      summary: Get Priorday transactions
+      tags:
+      - Transaction History Priorday
+      parameters:
+      - name: CheckOrSerialNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with this serial/check number
+      - name: TransactionAmount
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with this amount
+      - name: TransactionCode
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with this transaction code
+      - name: TransactionFilterType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Code used to indicate which type of transaction filtering should be performed
+      - name: ReturnExtended
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The type of inquiry desired
+      - name: TransactionCodeList
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with these transaction codes. Maximum number of transaction codes to filter on is 10
+      - name: TransactionDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The closing date in 'yyyy-MM-dd' format to use as the prior day. Defaults to the last business day from the current date
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      - name: X-Next-Page-Key
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
+    servers:
+    - url: https://api-connect.westernalliancebank.com
+      description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+    - url: https://api-connect.westernalliancebanktest.com
+      description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+  /info-single-acc-priorday-eapi/api/v1/dp/accounts/{AccountNumber}/transactions/priorDay:
+    get:
+      operationId: getInfoSingleAccPriordayEapiApiV1DpAccountsByAccountNumberTransactionsPriorDay
+      summary: Get Priorday transactions
+      tags:
+      - Transaction History Priorday
+      parameters:
+      - name: AccountNumber
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: TransactionDate
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: CheckOrSerialNumber
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: TransactionCode
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: TransactionFilterType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: TransactionAmount
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: ResponseType
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: TransactionCodeList
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      - name: X-Next-Page-Key
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
+      x-operation-id-source: normalized
+      x-operation-id-original: getPriordayTransactions
+    servers:
+    - url: https://api-connect.westernalliancebank.com
+      description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+    - url: https://api-connect.westernalliancebanktest.com
+      description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+components:
+  securitySchemes:
+    bearerToken:
+      type: http
+      scheme: bearer
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+    appClientId:
+      type: apiKey
+      in: header
+      name: appClientId
+      description: Client ID assigned by WAB at enrollment (used with appClientSecret on the token endpoint).
+    appClientSecret:
+      type: apiKey
+      in: header
+      name: appClientSecret
+      description: Client Secret known only to the client and the WAB API gateway.
+x-refined-from:
+- western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+- western-alliance-bancorporation-single-account-priorday-api-openapi.yml

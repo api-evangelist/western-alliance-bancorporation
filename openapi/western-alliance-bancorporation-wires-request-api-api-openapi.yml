@@ -1,13 +1,11 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Western Alliance Bank Wires Request API
+  title: Western Alliance Bank Wires Request Wires Request API
   version: v1
   description: 'Submits a wire transfer request (Fedwire or other method of payment) from a virtual account.
 
 
-    Derived mechanically from the ''Wires Request API'' Postman collection published on the WAB API Developer Portal (family:
-    Transactional APIs). Every path, header, query parameter and request body comes from that collection; response bodies
-    are not captured because the collection ships none.'
+    Derived mechanically from the ''Wires Request API'' Postman collection published on the WAB API Developer Portal (family: Transactional APIs). Every path, header, query parameter and request body comes from that collection; response bodies are not captured because the collection ships none.'
   contact:
     name: Western Alliance Bank API Developer Portal
     url: https://developer.westernalliancebank.com/s/
@@ -27,85 +25,8 @@ servers:
 - url: https://api-connect.westernalliancebanktest.com
   description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
 tags:
-- name: Get Token
-- name: Health Check
 - name: Wires Request API
 paths:
-  /entitlements-get-token-eapi/api/v1/token:
-    get:
-      operationId: getToken
-      summary: Get token
-      tags:
-      - Get Token
-      parameters:
-      - name: Scope
-        in: query
-        required: true
-        schema:
-          type: string
-        example: Informational
-      - name: appClientId
-        in: header
-        required: true
-        schema:
-          type: string
-        description: Credential header (appClientId); value issued by Western Alliance Bank at enrollment. Never publish real
-          values.
-      - name: appClientSecret
-        in: header
-        required: true
-        schema:
-          type: string
-        description: Credential header (appClientSecret); value issued by Western Alliance Bank at enrollment. Never publish
-          real values.
-      - name: X-Correlation-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Source-System
-        in: header
-        required: false
-        schema:
-          type: string
-      security: []
-      responses:
-        '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not
-            captured here.
-  /trnsct-wires-rqst-eapi/api/v1/healthcheck:
-    get:
-      operationId: healthcheck
-      summary: Healthcheck
-      tags:
-      - Health Check
-      parameters:
-      - name: X-Correlation-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Source-System
-        in: header
-        required: false
-        schema:
-          type: string
-      - name: X-Dependent-Ping
-        in: header
-        required: true
-        schema:
-          type: string
-        example: 'false'
-      security:
-      - bearerToken: []
-      responses:
-        '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not
-            captured here.
   /trnsct-wires-rqst-eapi/api/v1/wires/transferRequest:
     put:
       operationId: wiresRequestAPI
@@ -266,15 +187,13 @@ paths:
       - bearerToken: []
       responses:
         '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not
-            captured here.
+          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
 components:
   securitySchemes:
     bearerToken:
       type: http
       scheme: bearer
-      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the
-        appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
+      description: Bearer token returned by GET /entitlements-get-token-eapi/api/v1/token (Token API) in exchange for the appClientId + appClientSecret headers. Tokens are valid for a limited period (API Services Terms 6(c)(iii)).
     appClientId:
       type: apiKey
       in: header

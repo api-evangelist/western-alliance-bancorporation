@@ -1,11 +1,13 @@
+# x-archived-from: western-alliance-bancorporation-all-account-intraday-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.1.0
 info:
-  title: Western Alliance Bank Single Account Balance API
+  title: Western Alliance Bank All Account Intraday API
   version: v1
-  description: 'Returns the current balance for one account.
+  description: 'Same-day (intraday) transaction history across all entitled accounts, with optional filters and page-key pagination.
 
 
-    Derived mechanically from the ''Single Account Balance API'' Postman collection published on the WAB API Developer Portal
+    Derived mechanically from the ''All Account Intraday API'' Postman collection published on the WAB API Developer Portal
     (family: Informational APIs). Every path, header, query parameter and request body comes from that collection; response
     bodies are not captured because the collection ships none.'
   contact:
@@ -14,16 +16,13 @@ info:
   termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
   x-family: Informational
   x-generated-from: postman
-  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCNYU5JUQ6ZJACRBRUYBGDWHVXIU
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCTBLJSWMUVNHTFBJPOEF66G32DM
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
   x-provenance:
     generated: '2026-09-17'
     method: derived
-    source: postman/western-alliance-bancorporation-single-account-balance-api.postman_collection.json
+    source: postman/western-alliance-bancorporation-all-account-intraday-api.postman_collection.json
     note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
-    collection_quirks:
-    - 'Path ''/info-single-acc-balance-eapi/api/v1dp/accounts/{AccountNumber}/balance'' is carried verbatim: the collection
-      joins its base-path variable to the resource path without a ''/'' (Get balance).'
 servers:
 - url: https://api-connect.westernalliancebank.com
   description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
@@ -32,7 +31,7 @@ servers:
 tags:
 - name: Get Token
 - name: Health Check
-- name: Get Balance
+- name: Transaction History Intraday
 paths:
   /entitlements-get-token-eapi/api/v1/token:
     get:
@@ -47,12 +46,6 @@ paths:
         schema:
           type: string
         example: Informational
-      - name: Resource
-        in: query
-        required: false
-        schema:
-          type: string
-        example: https://microsoft.graph.com
       - name: appClientId
         in: header
         required: true
@@ -84,14 +77,74 @@ paths:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not
             captured here.
-  /info-single-acc-balance-eapi/api/v1/healthcheck:
+  /info-multi-acc-intraday-eapi/api/v1/healthcheck:
     get:
       operationId: healthcheck
       summary: Healthcheck
       tags:
       - Health Check
       parameters:
-      - name: X-Correlation-ID
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Dependent-Ping
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 'false'
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /info-multi-acc-intraday-eapi/api/v1/dp/accounts/transactions/intraday:
+    get:
+      operationId: getIntradayTransactions
+      summary: Get Intraday transactions
+      tags:
+      - Transaction History Intraday
+      parameters:
+      - name: FilterType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: filter on basis of type of payment
+      - name: CheckNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The check number to search for.
+      - name: Amount
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The amount to search for.
+      - name: TransactionCode
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The transaction code to search for.
+      - name: TimeDepositId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: X-Correlation-Id
         in: header
         required: true
         schema:
@@ -103,38 +156,7 @@ paths:
         required: false
         schema:
           type: string
-      - name: X-Dependent-Ping
-        in: header
-        required: true
-        schema:
-          type: string
-        example: 'false'
-      security:
-      - bearerToken: []
-      responses:
-        '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not
-            captured here.
-  /info-single-acc-balance-eapi/api/v1dp/accounts/{AccountNumber}/balance:
-    get:
-      operationId: getBalance
-      summary: Get balance
-      tags:
-      - Get Balance
-      parameters:
-      - name: AccountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: X-Correlation-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Source-System
+      - name: X-Next-Page-Key
         in: header
         required: false
         schema:

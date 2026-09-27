@@ -1,74 +1,70 @@
 openapi: 3.2.0
 info:
-  title: Western Alliance Bank Check Image API
+  title: Western Alliance Bank TassatPay E Client Data API
   version: v1
-  description: 'Retrieves the image of a paid check by account, check date, check number, trace number and amount.
+  description: 'Beta. Client gateway to the TassatPay blockchain-based real-time B2B payments network: wallet balances, deposits (wallet to DDA), redemptions, sends between wallets, transactions and wallet names.
 
 
-    Derived mechanically from the ''Check image API'' Postman collection published on the WAB API Developer Portal (family: Informational APIs). Every path, header, query parameter and request body comes from that collection; response bodies are not captured because the collection ships none.'
+    Derived mechanically from the ''TassatPay EAPI | Beta'' Postman collection published on the WAB API Developer Portal (family: Digital Assets APIs). Every path, header, query parameter and request body comes from that collection; response bodies are not captured because the collection ships none.'
   contact:
     name: Western Alliance Bank API Developer Portal
     url: https://developer.westernalliancebank.com/s/
   termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
-  x-family: Informational
+  x-family: Digital Assets
   x-generated-from: postman
-  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHEOWJRLBUVGAZJ6PKRUB7QZUUA
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCDRH2RZ55TBHADOEWYZPCUOVROM
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
   x-provenance:
     generated: '2026-09-17'
     method: derived
-    source: postman/western-alliance-bancorporation-check-image-api.postman_collection.json
+    source: postman/western-alliance-bancorporation-tassatpay-eapi-beta.postman_collection.json
     note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
+    collection_quirks:
+    - Path '/tassat-client-eapi{envKey}/api/v1/usertoken' carries the collection's undefined {{envKey}} variable verbatim (User Token/Wallets).
+  x-status: beta
 servers:
+- url: https://api-connect.westernalliancebanktest.com
+  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms) — the collection as published targets this host (env=qa)
 - url: https://api-connect.westernalliancebank.com
   description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
-- url: https://api-connect.westernalliancebanktest.com
-  description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
 tags:
-- name: Check Image
+- name: Client Data
 paths:
-  /info-check-image-eapi/api/v1/img/checks/{AccountNumber}:
+  /tassat-client-eapi/api/v1/clientdata:
     get:
-      operationId: getCheckImage
-      summary: Get Check Image
+      operationId: clientData
+      summary: Client Data
       tags:
-      - Check Image
+      - Client Data
       parameters:
-      - name: AccountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: CheckDate
+      - name: walletnames
         in: query
         required: true
         schema:
           type: string
-      - name: CheckNumber
-        in: query
+        example: 'true'
+      - name: access_token
+        in: header
         required: true
         schema:
           type: string
-      - name: TraceNumber
-        in: query
+        description: Credential header (access_token); value issued by Western Alliance Bank at enrollment. Never publish real values.
+      - name: user_token
+        in: header
         required: true
         schema:
           type: string
-      - name: Amount
-        in: query
-        required: true
-        schema:
-          type: string
-      - name: X-Correlation-ID
+        description: Credential header (user_token); value issued by Western Alliance Bank at enrollment. Never publish real values.
+      - name: UUID
         in: header
         required: true
         schema:
           type: string
           format: uuid
         description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Source-System
+      - name: SourceId
         in: header
-        required: false
+        required: true
         schema:
           type: string
       security:
@@ -76,6 +72,7 @@ paths:
       responses:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
+      x-beta: true
 components:
   securitySchemes:
     bearerToken:

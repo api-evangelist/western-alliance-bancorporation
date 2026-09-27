@@ -1,11 +1,13 @@
+# x-archived-from: western-alliance-bancorporation-all-account-balance-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.1.0
 info:
-  title: Western Alliance Bank Single Account Priorday API
+  title: Western Alliance Bank All Account Balance API
   version: v1
-  description: 'Prior-business-day posted transaction history for one account.
+  description: 'Returns current balances for every account entitled to the calling client.
 
 
-    Derived mechanically from the ''Single Account Priorday API'' Postman collection published on the WAB API Developer Portal
+    Derived mechanically from the ''All Account Balance API'' Postman collection published on the WAB API Developer Portal
     (family: Informational APIs). Every path, header, query parameter and request body comes from that collection; response
     bodies are not captured because the collection ships none.'
   contact:
@@ -14,12 +16,12 @@ info:
   termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
   x-family: Informational
   x-generated-from: postman
-  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2ZWHD6MCYJFMVJ5NO4257SUDAU
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
   x-provenance:
     generated: '2026-09-17'
     method: derived
-    source: postman/western-alliance-bancorporation-single-account-priorday-api.postman_collection.json
+    source: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
     note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
 servers:
 - url: https://api-connect.westernalliancebank.com
@@ -29,7 +31,7 @@ servers:
 tags:
 - name: Get Token
 - name: Health Check
-- name: Transaction History Priorday
+- name: Get Balance
 paths:
   /entitlements-get-token-eapi/api/v1/token:
     get:
@@ -44,6 +46,12 @@ paths:
         schema:
           type: string
         example: Informational
+      - name: Resource
+        in: query
+        required: false
+        schema:
+          type: string
+        example: https://microsoft.graph.com
       - name: appClientId
         in: header
         required: true
@@ -75,14 +83,14 @@ paths:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not
             captured here.
-  /info-single-acc-priorday-eapi/api/v1/healthcheck:
+  /info-multi-acc-balance-eapi/api/v1/healthcheck:
     get:
       operationId: healthcheck
       summary: Healthcheck
       tags:
       - Health Check
       parameters:
-      - name: X-Correlation-ID
+      - name: X-Correlation-Id
         in: header
         required: true
         schema:
@@ -106,54 +114,14 @@ paths:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not
             captured here.
-  /info-single-acc-priorday-eapi/api/v1/dp/accounts/{AccountNumber}/transactions/priorDay:
+  /info-multi-acc-balance-eapi/api/v1/dp/accounts/balance:
     get:
-      operationId: getPriordayTransactions
-      summary: Get Priorday transactions
+      operationId: getBalance
+      summary: Get balance
       tags:
-      - Transaction History Priorday
+      - Get Balance
       parameters:
-      - name: AccountNumber
-        in: path
-        required: true
-        schema:
-          type: string
-      - name: TransactionDate
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: CheckOrSerialNumber
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: TransactionCode
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: TransactionFilterType
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: TransactionAmount
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: ResponseType
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: TransactionCodeList
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: X-Correlation-ID
+      - name: X-Correlation-Id
         in: header
         required: true
         schema:
@@ -161,11 +129,6 @@ paths:
           format: uuid
         description: Client-generated GUID used to correlate the request across WAB systems.
       - name: X-Source-System
-        in: header
-        required: false
-        schema:
-          type: string
-      - name: X-Next-Page-Key
         in: header
         required: false
         schema:

@@ -1,11 +1,13 @@
+# x-archived-from: western-alliance-bancorporation-all-account-priorday-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.1.0
 info:
-  title: Western Alliance Bank All Account Balance API
+  title: Western Alliance Bank All Account Priorday API
   version: v1
-  description: 'Returns current balances for every account entitled to the calling client.
+  description: 'Prior-business-day posted transaction history across all entitled accounts.
 
 
-    Derived mechanically from the ''All Account Balance API'' Postman collection published on the WAB API Developer Portal
+    Derived mechanically from the ''All Account Priorday API'' Postman collection published on the WAB API Developer Portal
     (family: Informational APIs). Every path, header, query parameter and request body comes from that collection; response
     bodies are not captured because the collection ships none.'
   contact:
@@ -14,12 +16,12 @@ info:
   termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
   x-family: Informational
   x-generated-from: postman
-  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC3IULJ64C7BH3ZEQHQL7H3K35UU
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCCBJDRO525BECXI4ZTVWZE7SZLM
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
   x-provenance:
     generated: '2026-09-17'
     method: derived
-    source: postman/western-alliance-bancorporation-all-account-balance-api.postman_collection.json
+    source: postman/western-alliance-bancorporation-all-account-priorday-api.postman_collection.json
     note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
 servers:
 - url: https://api-connect.westernalliancebank.com
@@ -28,8 +30,8 @@ servers:
   description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
 tags:
 - name: Get Token
-- name: Health Check
-- name: Get Balance
+- name: Health check
+- name: Transaction History Priorday
 paths:
   /entitlements-get-token-eapi/api/v1/token:
     get:
@@ -81,13 +83,88 @@ paths:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not
             captured here.
-  /info-multi-acc-balance-eapi/api/v1/healthcheck:
+  /info-multi-acc-priorday-eapi/api/v1/healthcheck:
     get:
       operationId: healthcheck
       summary: Healthcheck
       tags:
-      - Health Check
+      - Health check
       parameters:
+      - name: X-Correlation-Id
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Dependent-Ping
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 'false'
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not
+            captured here.
+  /info-multi-acc-priorday-eapi/api/v1/dp/accounts/transactions/priorDay:
+    get:
+      operationId: getPriordayTransactions
+      summary: Get Priorday transactions
+      tags:
+      - Transaction History Priorday
+      parameters:
+      - name: CheckOrSerialNumber
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with this serial/check number
+      - name: TransactionAmount
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with this amount
+      - name: TransactionCode
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with this transaction code
+      - name: TransactionFilterType
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Code used to indicate which type of transaction filtering should be performed
+      - name: ReturnExtended
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The type of inquiry desired
+      - name: TransactionCodeList
+        in: query
+        required: false
+        schema:
+          type: string
+        description: Can be used to limit the transactions returned to those with these transaction codes. Maximum number
+          of transaction codes to filter on is 10
+      - name: TransactionDate
+        in: query
+        required: false
+        schema:
+          type: string
+        description: The closing date in 'yyyy-MM-dd' format to use as the prior day. Defaults to the last business day from
+          the current date
       - name: X-Correlation-Id
         in: header
         required: true
@@ -100,33 +177,7 @@ paths:
         required: false
         schema:
           type: string
-      - name: X-Dependent-Ping
-        in: header
-        required: true
-        schema:
-          type: string
-        example: 'false'
-      security:
-      - bearerToken: []
-      responses:
-        '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not
-            captured here.
-  /info-multi-acc-balance-eapi/api/v1/dp/accounts/balance:
-    get:
-      operationId: getBalance
-      summary: Get balance
-      tags:
-      - Get Balance
-      parameters:
-      - name: X-Correlation-Id
-        in: header
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Source-System
+      - name: X-Next-Page-Key
         in: header
         required: false
         schema:

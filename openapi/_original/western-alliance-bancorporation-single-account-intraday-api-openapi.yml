@@ -1,11 +1,13 @@
+# x-archived-from: western-alliance-bancorporation-single-account-intraday-api-openapi.yml
+# x-archived-on: 2026-09-26
 openapi: 3.1.0
 info:
-  title: Western Alliance Bank Date Range Transactions API
+  title: Western Alliance Bank Single Account Intraday API
   version: v1
-  description: 'Posted transactions for one account over a BeginDate/EndDate window, with filters and page-key pagination.
+  description: 'Same-day (intraday) transaction history for one account.
 
 
-    Derived mechanically from the ''Date Range Transactions API'' Postman collection published on the WAB API Developer Portal
+    Derived mechanically from the ''Single Account Intraday API'' Postman collection published on the WAB API Developer Portal
     (family: Informational APIs). Every path, header, query parameter and request body comes from that collection; response
     bodies are not captured because the collection ships none.'
   contact:
@@ -14,12 +16,12 @@ info:
   termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
   x-family: Informational
   x-generated-from: postman
-  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCVZIQDICWRBHT7H6B5UZUR5WHQA
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHRUUIGS4ORD63N42SXUMN77YY4
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
   x-provenance:
     generated: '2026-09-17'
     method: derived
-    source: postman/western-alliance-bancorporation-date-range-transactions-api.postman_collection.json
+    source: postman/western-alliance-bancorporation-single-account-intraday-api.postman_collection.json
     note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
 servers:
 - url: https://api-connect.westernalliancebank.com
@@ -29,7 +31,7 @@ servers:
 tags:
 - name: Get Token
 - name: Health Check
-- name: Date Range Transaction History
+- name: Transaction History Intraday
 paths:
   /entitlements-get-token-eapi/api/v1/token:
     get:
@@ -75,7 +77,7 @@ paths:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not
             captured here.
-  /info-dt-rng-trns-eapi/api/v1/healthcheck:
+  /info-single-acc-intraday-eapi/api/v1/healthcheck:
     get:
       operationId: healthcheck
       summary: Healthcheck
@@ -106,24 +108,19 @@ paths:
         '200':
           description: Successful response. The published collection ships no saved response, so the response schema is not
             captured here.
-  /info-dt-rng-trns-eapi/api/v1/dp/accounts/{AccountNumber}/AccountTransactions:
+  /info-single-acc-intraday-eapi/api/v1/dp/accounts/{AccountNumber}/transactions/intraday:
     get:
-      operationId: getDateRangeTransactions
-      summary: Get Date Range Transactions
+      operationId: getIntradayTransactions
+      summary: Get Intraday transactions
       tags:
-      - Date Range Transaction History
+      - Transaction History Intraday
       parameters:
       - name: AccountNumber
         in: path
         required: true
         schema:
           type: string
-      - name: BeginDate
-        in: query
-        required: false
-        schema:
-          type: string
-      - name: EndDate
+      - name: CheckNumber
         in: query
         required: false
         schema:
@@ -133,17 +130,12 @@ paths:
         required: false
         schema:
           type: string
-      - name: CheckNumber
-        in: query
-        required: false
-        schema:
-          type: string
       - name: TransactionCode
         in: query
         required: false
         schema:
           type: string
-      - name: HistoryFilterType
+      - name: FilterType
         in: query
         required: false
         schema:

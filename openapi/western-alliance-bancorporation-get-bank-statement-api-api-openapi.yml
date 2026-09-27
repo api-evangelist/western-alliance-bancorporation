@@ -1,41 +1,50 @@
 openapi: 3.2.0
 info:
-  title: Western Alliance Bank Book Transfer API
+  title: Western Alliance Bank Bank Statement Get Bank Statement API
   version: v1
-  description: 'Moves funds between two Western Alliance accounts held by the same client (book transfer).
+  description: 'Retrieves a bank statement document for an account and statement period.
 
 
-    Derived mechanically from the ''Book Transfer API'' Postman collection published on the WAB API Developer Portal (family: Transactional APIs). Every path, header, query parameter and request body comes from that collection; response bodies are not captured because the collection ships none.'
+    Derived mechanically from the ''Bank Statement API'' Postman collection published on the WAB API Developer Portal (family: Informational APIs). Every path, header, query parameter and request body comes from that collection; response bodies are not captured because the collection ships none.'
   contact:
     name: Western Alliance Bank API Developer Portal
     url: https://developer.westernalliancebank.com/s/
   termsOfService: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
-  x-family: Transactional
+  x-family: Informational
   x-generated-from: postman
-  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC7LBVXMMYIJAXBABHXRZSLULAPM
+  x-source: https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCHF55PTNWUBDDJNICFRIXXGGNXM
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
   x-provenance:
     generated: '2026-09-17'
     method: derived
-    source: postman/western-alliance-bancorporation-book-transfer-api.postman_collection.json
+    source: postman/western-alliance-bancorporation-bank-statement-api.postman_collection.json
     note: Mechanical Postman -> OpenAPI conversion; no operations, parameters or examples were added beyond the collection.
-    collection_quirks:
-    - Request 'Healthcheck' in folder 'Health Check' references an undefined collection variable in its host/base-path (api-connect.westernalliancebank.com{BASE_PATH_PRIORDAY_SERVICE}) and was NOT carried; the collection as published cannot resolve it.
 servers:
 - url: https://api-connect.westernalliancebank.com
   description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
 - url: https://api-connect.westernalliancebanktest.com
   description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
 tags:
-- name: Book Transfer
+- name: Get Bank Statement API
 paths:
-  /info-book-transfer-eapi/api/v1/dp/transactions/transfer:
-    post:
-      operationId: bookTransfer
-      summary: Book Transfer
+  /info-bank-statements-eapi/api/v1/img/documents/statement:
+    get:
+      operationId: bankStatementsAPI
+      summary: Bank Statements API
       tags:
-      - Book Transfer
+      - Get Bank Statement API
       parameters:
+      - name: AccountNumber
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: Period
+        in: query
+        required: true
+        schema:
+          type: string
+        description: YYYYMM
       - name: X-Correlation-ID
         in: header
         required: true
@@ -48,33 +57,6 @@ paths:
         required: false
         schema:
           type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                StandardDollarTransferData:
-                  type: object
-                  properties:
-                    FromAccountNumber:
-                      type: string
-                    TransactionAmount:
-                      type: integer
-                    FromTrailerDescription:
-                      type: string
-                    ToAccountNumber:
-                      type: string
-                    ToTrailerDescription:
-                      type: string
-            example:
-              StandardDollarTransferData:
-                FromAccountNumber: '{{From_AccountNumber}}'
-                TransactionAmount: 1
-                FromTrailerDescription: test source trailer description
-                ToAccountNumber: '{{To_AccountNumber}}'
-                ToTrailerDescription: test destination trailer description
       security:
       - bearerToken: []
       responses:
