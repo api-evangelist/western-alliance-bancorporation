@@ -9,10 +9,11 @@ info:
   x-refined-note:
   - x-family differs across the merged source definitions and was not carried
   - x-provenance differs across the merged source definitions and was not carried
+  - x-refined-note differs across the merged source definitions and was not carried
   - x-source differs across the merged source definitions and was not carried
   x-generated-from: postman
   x-source-page: https://developer.westernalliancebank.com/s/postman-collection
-  description: 'Operations tagged Health Check across 12 of this provider''s published API definitions: western-alliance-bancorporation-all-account-balance-api-openapi.yml, western-alliance-bancorporation-all-account-intraday-api-openapi.yml, western-alliance-bancorporation-all-account-priorday-api-openapi.yml, western-alliance-bancorporation-bank-statement-api-openapi.yml, western-alliance-bancorporation-check-image-api-openapi.yml, western-alliance-bancorporation-date-range-transactions-api-openapi.yml…'
+  description: 'Operations tagged Health Check across 11 of this provider''s published API definitions: western-alliance-bancorporation-all-account-balance-api-openapi.yml, western-alliance-bancorporation-all-account-intraday-api-openapi.yml, western-alliance-bancorporation-all-account-priorday-api-openapi.yml, western-alliance-bancorporation-bank-statement-api-openapi.yml, western-alliance-bancorporation-date-range-transactions-api-openapi.yml…'
 servers:
 - url: https://api-connect.westernalliancebank.com
   description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
@@ -155,43 +156,6 @@ paths:
         schema:
           type: string
         example: 'false'
-      security:
-      - bearerToken: []
-      responses:
-        '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
-      x-operation-id-source: normalized
-      x-operation-id-original: healthcheck
-    servers:
-    - url: https://api-connect.westernalliancebank.com
-      description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
-    - url: https://api-connect.westernalliancebanktest.com
-      description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
-  /info-check-image-eapi/api/v1/healthcheck:
-    get:
-      operationId: getInfoCheckImageEapiApiV1Healthcheck
-      summary: Healthcheck
-      tags:
-      - Health Check
-      parameters:
-      - name: X-Correlation-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Dependent-Ping
-        in: header
-        required: true
-        schema:
-          type: string
-        example: 'false'
-      - name: X-Source-System
-        in: header
-        required: false
-        schema:
-          type: string
       security:
       - bearerToken: []
       responses:
@@ -352,43 +316,6 @@ paths:
       description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
     - url: https://api-connect.westernalliancebanktest.com
       description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
-  /info-stop-payments-eapi/api/v1/healthcheck:
-    get:
-      operationId: getInfoStopPaymentsEapiApiV1Healthcheck
-      summary: Healthcheck
-      tags:
-      - Health Check
-      parameters:
-      - name: X-Correlation-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          format: uuid
-        description: Client-generated GUID used to correlate the request across WAB systems.
-      - name: X-Dependent-Ping
-        in: header
-        required: true
-        schema:
-          type: string
-        example: 'false'
-      - name: X-Source-System
-        in: header
-        required: false
-        schema:
-          type: string
-      security:
-      - bearerToken: []
-      responses:
-        '200':
-          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
-      x-operation-id-source: normalized
-      x-operation-id-original: healthcheck
-    servers:
-    - url: https://api-connect.westernalliancebank.com
-      description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
-    - url: https://api-connect.westernalliancebanktest.com
-      description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
   /entitlements-get-token-eapi/api/v1/healthcheck:
     get:
       operationId: getEntitlementsGetTokenEapiApiV1Healthcheck
@@ -463,6 +390,80 @@ paths:
       description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
     - url: https://api-connect.westernalliancebanktest.com
       description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+  /info-check-image-eapi/api/v1/healthcheck:
+    servers:
+    - url: https://api-connect.westernalliancebank.com
+      description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+    - url: https://api-connect.westernalliancebanktest.com
+      description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+    get:
+      operationId: getInfoCheckImageEapiApiV1Healthcheck
+      summary: Healthcheck
+      tags:
+      - Health Check
+      parameters:
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Dependent-Ping
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 'false'
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
+      x-operation-id-source: normalized
+      x-operation-id-original: healthcheck
+  /info-stop-payments-eapi/api/v1/healthcheck:
+    servers:
+    - url: https://api-connect.westernalliancebank.com
+      description: Production (Client ID / Client Secret and token issued at Treasury Management enrollment)
+    - url: https://api-connect.westernalliancebanktest.com
+      description: Client UAT environment (all data must be fake / masked test data per the API Services Terms)
+    get:
+      operationId: getInfoStopPaymentsEapiApiV1Healthcheck
+      summary: Healthcheck
+      tags:
+      - Health Check
+      parameters:
+      - name: X-Correlation-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          format: uuid
+        description: Client-generated GUID used to correlate the request across WAB systems.
+      - name: X-Dependent-Ping
+        in: header
+        required: true
+        schema:
+          type: string
+        example: 'false'
+      - name: X-Source-System
+        in: header
+        required: false
+        schema:
+          type: string
+      security:
+      - bearerToken: []
+      responses:
+        '200':
+          description: Successful response. The published collection ships no saved response, so the response schema is not captured here.
+      x-operation-id-source: normalized
+      x-operation-id-original: healthcheck
   /trnsct-ach-eapi/api/v1/healthcheck:
     get:
       operationId: healthcheck
@@ -510,11 +511,10 @@ x-refined-from:
 - western-alliance-bancorporation-all-account-intraday-api-openapi.yml
 - western-alliance-bancorporation-all-account-priorday-api-openapi.yml
 - western-alliance-bancorporation-bank-statement-api-openapi.yml
-- western-alliance-bancorporation-check-image-api-openapi.yml
 - western-alliance-bancorporation-date-range-transactions-api-openapi.yml
 - western-alliance-bancorporation-single-account-balance-api-openapi.yml
 - western-alliance-bancorporation-single-account-intraday-api-openapi.yml
 - western-alliance-bancorporation-single-account-priorday-api-openapi.yml
-- western-alliance-bancorporation-stop-payments-api-openapi.yml
 - western-alliance-bancorporation-token-api-openapi.yml
 - western-alliance-bancorporation-wires-request-api-openapi.yml
+- western-alliance-bancorporation-health-check-api-openapi.yml

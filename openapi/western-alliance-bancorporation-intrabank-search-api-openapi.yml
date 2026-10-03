@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Western Alliance Bank Intrabank Transfer Intrabank Search…
+  title: Western Alliance Bank Intrabank Transfer … Intrabank Search…
   version: v1-v2
   description: 'Initiates an intra-bank transfer between two Western Alliance Bank accounts and searches
 
@@ -114,6 +114,43 @@ paths:
                       additionalInfo: Invalid search parameter. Either ValueDate or PaymentId or PaymentMessageReference will be accepted. Please provide any one of the aforementioned parameter along with SystemIdentifier and OriginatorAccountId.
 components:
   schemas:
+    ErrorEnvelope:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              additionalInfo:
+                type: string
+    IntraBankSearchRequest:
+      type: object
+      required:
+      - SystemIdentifier
+      - AccountId
+      - Type
+      properties:
+        SystemIdentifier:
+          type: string
+        AccountId:
+          type: string
+        Type:
+          type: string
+          enum:
+          - Beneficiary
+          - Originator
+        ValueDate:
+          type: string
+          description: yyyy-MM-dd. Mutually exclusive with PaymentId and PaymentMessageReference.
+        PaymentId:
+          type: string
+        PaymentMessageReference:
+          type: string
     IntraBankTransaction:
       type: object
       properties:
@@ -157,43 +194,6 @@ components:
           type: string
         BeneficiaryName:
           type: string
-    IntraBankSearchRequest:
-      type: object
-      required:
-      - SystemIdentifier
-      - AccountId
-      - Type
-      properties:
-        SystemIdentifier:
-          type: string
-        AccountId:
-          type: string
-        Type:
-          type: string
-          enum:
-          - Beneficiary
-          - Originator
-        ValueDate:
-          type: string
-          description: yyyy-MM-dd. Mutually exclusive with PaymentId and PaymentMessageReference.
-        PaymentId:
-          type: string
-        PaymentMessageReference:
-          type: string
-    ErrorEnvelope:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-              message:
-                type: string
-              additionalInfo:
-                type: string
     IntraBankSearchResponse:
       type: object
       properties:
