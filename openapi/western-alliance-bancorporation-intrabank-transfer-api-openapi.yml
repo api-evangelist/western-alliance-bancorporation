@@ -141,6 +141,20 @@ paths:
                   additionalInfo: Intrabank transfer request already exists
 components:
   schemas:
+    ErrorEnvelope:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              additionalInfo:
+                type: string
     IntraBankTransferResponse:
       type: object
       properties:
@@ -193,20 +207,6 @@ components:
           type: string
         RemittanceInformation:
           type: string
-    ErrorEnvelope:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-              message:
-                type: string
-              additionalInfo:
-                type: string
   parameters:
     XCorrelationId:
       name: X-Correlation-Id
