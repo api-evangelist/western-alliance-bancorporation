@@ -347,6 +347,8 @@ apis:
   humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
   baseURL: https://api-connect.westernalliancebank.com
   tags:
+  - Balances
+  tags_raw:
   - Balance
   properties:
   - type: OpenAPI
@@ -1682,6 +1684,8 @@ apis:
   humanURL: https://developer.westernalliancebank.com/s/apis/utility-apis
   baseURL: https://api-connect.westernalliancebank.com
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
