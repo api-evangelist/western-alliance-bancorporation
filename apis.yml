@@ -2013,6 +2013,8 @@ apis:
   - type: Documentation
     url: https://developer.westernalliancebank.com/s/apis/digital-assets-apis
 common:
+- type: Pricing
+  url: https://www.westernalliancebancorporation.com/sites/default/files/2025-05/api-services-terms-conditions.pdf
 - type: Customers
   url: https://www.westernalliancebank.com
 - type: Resources
