@@ -4,7 +4,7 @@ method: generated
 name: Check balances and pull transaction history
 description: Authenticate, read balances for one or all entitled accounts, and page through intraday, prior-day or date-range transaction history with filters.
 api: openapi/western-alliance-bancorporation-all-account-balance-api-openapi.yml
-operations: [getToken, getBalance, getIntradayTransactions, getPriordayTransactions, getDateRangeTransactions]
+operations: [getToken, getInfoSingleAccBalanceEapiApiV1dpAccountsByAccountNumberBalance, getInfoSingleAccIntradayEapiApiV1DpAccountsByAccountNumberTransactionsIntraday, getInfoSingleAccPriordayEapiApiV1DpAccountsByAccountNumberTransactionsPriorDay, getDateRangeTransactions]
 source: >-
   Grounded in the Informational API Postman collections on the WAB API Developer Portal
   (https://developer.westernalliancebank.com/s/postman-collection) and the portal's Get Balance tutorial page;

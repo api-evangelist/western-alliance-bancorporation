@@ -4,7 +4,7 @@ method: generated
 name: Initiate and reconcile an intrabank transfer
 description: Move funds between two Western Alliance Bank accounts, capture the Payment Message Reference, confirm via the webhook (or Search API fallback), and reconcile against intraday and prior-day history.
 api: openapi/western-alliance-bancorporation-intrabank-transfer-api-openapi.yml
-operations: [getToken, initiateIntraBankTransfer, searchIntraBankTransfers, getIntradayTransactions, getPriordayTransactions]
+operations: [getToken, initiateIntraBankTransfer, searchIntraBankTransfers, getInfoSingleAccIntradayEapiApiV1DpAccountsByAccountNumberTransactionsIntraday, getInfoSingleAccPriordayEapiApiV1DpAccountsByAccountNumberTransactionsPriorDay]
 source: >-
   Mirrors the "Core Workflow" in the provider's Intrabank Transfer API User Guide
   (https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MC2GPNZ5A6AFBB7FPCQ6YISYCQY4);

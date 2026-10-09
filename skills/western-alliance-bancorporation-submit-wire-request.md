@@ -4,7 +4,7 @@ method: generated
 name: Submit a wire transfer request
 description: Authenticate and submit a Fedwire-style wire transfer request from a virtual account, then verify posting through the transaction history APIs.
 api: openapi/western-alliance-bancorporation-wires-request-api-openapi.yml
-operations: [getToken, healthcheck, wiresRequestAPI, getPriordayTransactions]
+operations: [getToken, getTrnsctWiresRqstEapiApiV1Healthcheck, wiresRequestAPI, getInfoSingleAccPriordayEapiApiV1DpAccountsByAccountNumberTransactionsPriorDay]
 source: >-
   Grounded in the Wires Request API Postman collection
   (https://developer.westernalliancebank.com/sfsites/c/cms/delivery/media/MCJUIZSAE2RBGVPGZKSFAQABOWGM);
