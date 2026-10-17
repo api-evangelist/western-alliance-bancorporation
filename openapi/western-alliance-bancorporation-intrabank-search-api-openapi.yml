@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Western Alliance Bank Intrabank Transfer … … Intrabank…
+  title: Western Alliance Bank Intrabank Transfer … … Intrabank……
   version: v1-v2
   description: 'Initiates an intra-bank transfer between two Western Alliance Bank accounts and searches
 
@@ -128,17 +128,6 @@ components:
                 type: string
               additionalInfo:
                 type: string
-    IntraBankSearchResponse:
-      type: object
-      properties:
-        CurrentPage:
-          type: string
-        TransactionCount:
-          type: integer
-        Transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/IntraBankTransaction'
     IntraBankSearchRequest:
       type: object
       required:
@@ -205,6 +194,17 @@ components:
           type: string
         BeneficiaryName:
           type: string
+    IntraBankSearchResponse:
+      type: object
+      properties:
+        CurrentPage:
+          type: string
+        TransactionCount:
+          type: integer
+        Transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/IntraBankTransaction'
   parameters:
     XCorrelationId:
       name: X-Correlation-Id

@@ -141,20 +141,6 @@ paths:
                   additionalInfo: Intrabank transfer request already exists
 components:
   schemas:
-    ErrorEnvelope:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-              message:
-                type: string
-              additionalInfo:
-                type: string
     IntraBankTransferResponse:
       type: object
       properties:
@@ -171,6 +157,20 @@ components:
         PaymentMessageReference:
           type: string
           description: System-generated reference; the primary key for matching the transfer in every other API and the webhook.
+    ErrorEnvelope:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+              message:
+                type: string
+              additionalInfo:
+                type: string
     IntraBankTransferRequest:
       type: object
       required:
