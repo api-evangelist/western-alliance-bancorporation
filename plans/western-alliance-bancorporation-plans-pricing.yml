@@ -68,11 +68,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 x-canonical:
-  generated: '2026-11-02'
+  generated: '2026-11-06'
   vocabulary: engine/economics/plans-canonical.yml
   models:
   - hybrid
   units:
+  - period
   - transaction
   plans:
   - name: Treasury Management API Services
@@ -80,7 +81,7 @@ x-canonical:
     model: hybrid
     model_how: derived
     units:
-    - other
+    - period
     - transaction
     periods:
     - per-use
